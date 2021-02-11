@@ -1,0 +1,23 @@
+{
+  "name": "idoit-task-tracker",
+  "version": "1.0.0",
+  "description": "The Odin Project: To-Do List",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaiahaiasi/idoit-task-tracker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isaiahaiasi/idoit-task-tracker/issues"
+  },
+  "homepage": "https://github.com/isaiahaiasi/idoit-task-tracker#readme",
+  "devDependencies": {
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0"
+  }
+}
