@@ -1,8 +1,11 @@
 //! STYLE IMPORTS
 import './styles/style.css';
 
-const el = document.createElement('div');
-el.classList.add('hello');
-el.textContent = 'hello webpack';
+import taskView from './view/task_view';
+import { getTestTask } from './model/task';
 
-document.body.appendChild(el);
+const newTaskView = taskView(getTestTask());
+
+document.body.appendChild(newTaskView.view);
+
+newTaskView.renderSimple();
