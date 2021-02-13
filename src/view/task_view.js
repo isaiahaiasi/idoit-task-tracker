@@ -2,29 +2,43 @@ const taskView = (task) => {
   const template = document.querySelector('#task-template');
   const taskTemplate = template.content.querySelector('.task');
   const node = taskTemplate.cloneNode(true);
-  node.classList.add('expanded');
+
+  let _hideWhenComplete = false;
 
   const _deleteTask = () => {
     task.delete();
     node.remove();
   };
 
+  const _updateHiddenState = () => {
+    if (_hideWhenComplete && task.isComplete) {
+      node.classList.add('hidden');
+    } else {
+      node.classList.remove('hidden');
+    }
+  };
+
+  const setHideOnComplete = (bool) => {
+    _hideWhenComplete = bool;
+    _updateHiddenState();
+  };
+
   const render = () => {
-    // Display properties
     node.querySelector('.task-title').textContent = task.title;
     node.querySelector('.task-priority').textContent = task.priority;
     node.querySelector('.task-due-date').textContent = task.dueDate;
-    return node;
   };
 
   const _initListeners = () => {
     const isCompleteCheckbox = node.querySelector('.task-is-complete');
     isCompleteCheckbox.checked = task.isComplete;
+    _updateHiddenState();
     isCompleteCheckbox.addEventListener('change', () => {
       task.setIsComplete(isCompleteCheckbox.checked);
+      _updateHiddenState();
     });
 
-    const deleteBtn = node.querySelector('.delete-btn');
+    const deleteBtn = node.querySelector('.task-delete-btn');
 
     deleteBtn.addEventListener('click', () => {
       // TODO: Add confirmation modal
@@ -34,7 +48,9 @@ const taskView = (task) => {
 
   _initListeners();
 
-  return { node, task, render };
+  return {
+    node, task, setHideOnComplete, render,
+  };
 };
 
 export { taskView as default };

@@ -9,17 +9,9 @@ const projectView = (project) => {
 
   let doHideComplete = false;
 
-  //! vvvvvvvvvvvvvvvvv
-  // TODO: Need to add way to hide task IMMEDIATELY when "hide complete" is on
-  // TODO: ... which means, move as much of this as possible to the task
   const _showComplete = (bool) => {
     taskViews.forEach((tv) => {
-      const tvIsComplete = tv.task.isComplete;
-      if (bool && tvIsComplete) {
-        tv.node.classList.add('hidden');
-      } else {
-        tv.node.classList.remove('hidden');
-      }
+      tv.setHideOnComplete(bool);
     });
   };
 
