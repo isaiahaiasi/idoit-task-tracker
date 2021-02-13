@@ -1,32 +1,70 @@
-import taskView from './task_view';
+import TaskView from './task_view';
+import { removeAllChildren } from './view_utils';
 
 const projectView = (project) => {
   const template = document.querySelector('#project-template');
   const projectTemplate = template.content.querySelector('.project');
-  const view = projectTemplate.cloneNode(true);
+  const node = projectTemplate.cloneNode(true);
+  const taskViews = [];
 
-  const _renderTasks = () => {
-    const taskViews = [];
-    project.tasks.forEach((task) => {
-      const tv = taskView(task);
-      tv.render();
-      taskViews.push(tv.node);
+  let doHideComplete = false;
+
+  //! vvvvvvvvvvvvvvvvv
+  // TODO: Need to add way to hide task IMMEDIATELY when "hide complete" is on
+  // TODO: ... which means, move as much of this as possible to the task
+  const _showComplete = (bool) => {
+    taskViews.forEach((tv) => {
+      const tvIsComplete = tv.task.isComplete;
+      if (bool && tvIsComplete) {
+        tv.node.classList.add('hidden');
+      } else {
+        tv.node.classList.remove('hidden');
+      }
     });
-    return taskViews;
+  };
+
+  const _renderTasks = (taskViewContainer) => {
+    removeAllChildren(taskViewContainer);
+    taskViews.splice(0, taskViews.length);
+
+    project.tasks.forEach((task) => {
+      const tv = TaskView(task);
+      tv.render();
+      taskViewContainer.appendChild(tv.node);
+      taskViews.push(tv);
+    });
+
+    if (doHideComplete) {
+      _showComplete(doHideComplete);
+    }
   };
 
   const render = () => {
     // Set title & description
-    view.querySelector('.project-title').textContent = project.title;
-    view.querySelector('.project-description').textContent = project.description;
+    node.querySelector('.project-title').textContent = project.title;
+    node.querySelector('.project-description').textContent = project.description;
 
-    const taskViewContainer = view.querySelector('.project-tasks-container');
-    const taskViews = _renderTasks();
-
-    taskViews.forEach((tv) => taskViewContainer.appendChild(tv));
+    // Render tasks
+    const taskViewContainer = node.querySelector('.project-tasks-container');
+    _renderTasks(taskViewContainer);
   };
 
-  return { view, render };
+  const _initListeners = () => {
+    const rerenderBtn = node.querySelector('.rerender-btn');
+    rerenderBtn.addEventListener('click', () => {
+      render();
+    });
+
+    const hideCompleteChkbx = node.querySelector('.hide-complete-chkbx');
+    hideCompleteChkbx.addEventListener('change', () => {
+      doHideComplete = hideCompleteChkbx.checked;
+      _showComplete(doHideComplete);
+    });
+  };
+
+  _initListeners();
+
+  return { node, render };
 };
 
 export { projectView as default };

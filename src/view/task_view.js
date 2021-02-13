@@ -6,7 +6,7 @@ const taskView = (task) => {
 
   const _deleteTask = () => {
     task.delete();
-    node.destroy();
+    node.remove();
   };
 
   const render = () => {
@@ -14,8 +14,10 @@ const taskView = (task) => {
     node.querySelector('.task-title').textContent = task.title;
     node.querySelector('.task-priority').textContent = task.priority;
     node.querySelector('.task-due-date').textContent = task.dueDate;
+    return node;
+  };
 
-    // Inputs
+  const _initListeners = () => {
     const isCompleteCheckbox = node.querySelector('.task-is-complete');
     isCompleteCheckbox.checked = task.isComplete;
     isCompleteCheckbox.addEventListener('change', () => {
@@ -23,15 +25,16 @@ const taskView = (task) => {
     });
 
     const deleteBtn = node.querySelector('.delete-btn');
+
     deleteBtn.addEventListener('click', () => {
       // TODO: Add confirmation modal
       _deleteTask();
     });
-
-    return node;
   };
 
-  return { node, render };
+  _initListeners();
+
+  return { node, task, render };
 };
 
 export { taskView as default };

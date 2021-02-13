@@ -12,5 +12,5 @@ testProject.addTask(...tasks);
 
 const testProjectView = ProjectView(testProject);
 
-document.body.appendChild(testProjectView.view);
+document.body.appendChild(testProjectView.node);
 testProjectView.render();

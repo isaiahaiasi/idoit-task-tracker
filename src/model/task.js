@@ -14,12 +14,7 @@ class Task {
   }
 
   delete() {
-    const projectTaskList = this.project.tasks;
-    if (!projectTaskList) {
-      console.error(`Could not find task list to remove ${this.title} from.`);
-      return;
-    }
-    projectTaskList.remove(projectTaskList.indexOf(this));
+    this.project.removeTask(this);
   }
 }
 
