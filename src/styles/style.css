@@ -1,6 +1,7 @@
 .task {
   color: rgb(44, 44, 44);
-  display:flex;
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
   justify-content:space-between;
   width:100%;
 }

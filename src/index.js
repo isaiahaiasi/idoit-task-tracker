@@ -1,11 +1,16 @@
 //! STYLE IMPORTS
 import './styles/style.css';
 
-import taskView from './view/task_view';
 import { taskMock } from './model/task';
+import Project from './model/project';
+import ProjectView from './view/project_view';
 
-const newTaskView = taskView(taskMock.getTestTask());
+const testProject = new Project('Test Project', 'My stupid test project');
+const tasks = taskMock.getMockTasks(7, testProject);
 
-document.body.appendChild(newTaskView.view);
+testProject.addTask(...tasks);
 
-newTaskView.renderSimple();
+const testProjectView = ProjectView(testProject);
+
+document.body.appendChild(testProjectView.view);
+testProjectView.render();
