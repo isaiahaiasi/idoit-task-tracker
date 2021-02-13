@@ -17,8 +17,9 @@
   - Task priority
   - Task due date
 - ### Inputs
-  - Expand
+  - Mark complete
   - Delete
+  - Expand
   - Sort
 ## Task (details)
 - ### Displays
@@ -27,6 +28,7 @@
   - Task priority
   - Task due date
 - ### Inputs
+  - Mark complete
   - Shrink
   - Edit
   - Delete

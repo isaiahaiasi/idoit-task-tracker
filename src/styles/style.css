@@ -1,3 +1,15 @@
-.hello {
-  color: red;
+.task {
+  color: rgb(44, 44, 44);
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+}
+
+.task-is-complete::after {
+  content:'__done?';
+}
+
+.task-is-complete:checked ~ div {
+  text-decoration:line-through;
+  color: darkgrey;
 }
