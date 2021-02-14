@@ -42,11 +42,6 @@ const projectView = (project) => {
   };
 
   const _initListeners = () => {
-    const rerenderBtn = node.querySelector('.rerender-btn');
-    rerenderBtn.addEventListener('click', () => {
-      render();
-    });
-
     const hideCompleteChkbx = node.querySelector('.hide-complete-chkbx');
     hideCompleteChkbx.addEventListener('change', () => {
       doHideComplete = hideCompleteChkbx.checked;

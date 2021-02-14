@@ -3,7 +3,6 @@ import './styles/style.css';
 
 import { taskMock } from './model/task';
 import Project from './model/project';
-import ProjectView from './view/project_view';
 import DirectoryView from './view/dir_view';
 
 const testProjects = [
@@ -18,8 +17,5 @@ testProjects.forEach((testProject) => {
 });
 const projectViewContainer = document.querySelector('.main-view');
 const sideBar = DirectoryView(testProjects, projectViewContainer);
-const testProjectView = ProjectView(testProjects[0]);
 
 document.querySelector('.sidebar-container').appendChild(sideBar.node);
-// projectViewContainer.appendChild(testProjectView.node);
-// testProjectView.render();
