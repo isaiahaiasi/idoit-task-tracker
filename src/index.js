@@ -16,10 +16,10 @@ testProjects.forEach((testProject) => {
   const tasks = taskMock.getMockTasks(7, testProject);
   testProject.addTask(...tasks);
 });
-
-const sideBar = DirectoryView(testProjects);
+const projectViewContainer = document.querySelector('.main-view');
+const sideBar = DirectoryView(testProjects, projectViewContainer);
 const testProjectView = ProjectView(testProjects[0]);
 
 document.querySelector('.sidebar-container').appendChild(sideBar.node);
-document.querySelector('.main-view').appendChild(testProjectView.node);
-testProjectView.render();
+// projectViewContainer.appendChild(testProjectView.node);
+// testProjectView.render();
