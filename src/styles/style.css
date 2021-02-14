@@ -23,6 +23,10 @@
   cursor:pointer;
 }
 
+.card.selected {
+  background-color:whitesmoke;
+}
+
 .card {
   background:rgb(194, 194, 194);
 }

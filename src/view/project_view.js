@@ -1,7 +1,7 @@
 import TaskView from './task_view';
 import { removeAllChildren } from './view_utils';
 
-const projectView = (project) => {
+const ProjectView = (project) => {
   const template = document.querySelector('#project-template');
   const projectTemplate = template.content.querySelector('.project');
   const node = projectTemplate.cloneNode(true);
@@ -53,4 +53,4 @@ const projectView = (project) => {
   return { node, render };
 };
 
-export { projectView as default };
+export { ProjectView as default };
