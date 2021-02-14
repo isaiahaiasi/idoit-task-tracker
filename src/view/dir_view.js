@@ -1,7 +1,7 @@
 import { removeAllChildren } from './view_utils';
 import ProjectView from './project_view';
 
-const ProjectPreview = (project, projectViewContainer) => {
+const DirectoryItem = (project, contentContainer) => {
   const projectPreviewTemplate = document.querySelector('#project-preview-template');
   const node = projectPreviewTemplate.content
     .querySelector('.project-preview')
@@ -9,9 +9,9 @@ const ProjectPreview = (project, projectViewContainer) => {
   node.querySelector('._title').textContent = project.title;
 
   const activateProjectView = () => {
-    removeAllChildren(projectViewContainer);
+    removeAllChildren(contentContainer);
     const projectView = ProjectView(project);
-    projectViewContainer.appendChild(projectView.node);
+    contentContainer.appendChild(projectView.node);
     projectView.render();
   };
 
@@ -21,12 +21,12 @@ const ProjectPreview = (project, projectViewContainer) => {
 };
 
 // Directory (collection of projects, displayed in sidebar)
-const DirectoryView = (projects, projectViewContainer) => {
+const DirectoryView = (projects, contentContainer) => {
   const template = document.querySelector('#sidebar-template');
   const node = template.content.querySelector('.sidebar').cloneNode(true);
   const projectPreviews = [];
   projects.forEach((project) => {
-    const projectPreview = ProjectPreview(project, projectViewContainer);
+    const projectPreview = DirectoryItem(project, contentContainer);
     node.appendChild(projectPreview.node);
     projectPreviews.push(projectPreview);
   });

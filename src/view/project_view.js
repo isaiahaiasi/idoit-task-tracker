@@ -19,9 +19,8 @@ const projectView = (project) => {
     removeAllChildren(taskViewContainer);
     taskViews.splice(0, taskViews.length);
 
-    project.tasks.forEach((task) => {
+    project.children.forEach((task) => {
       const tv = TaskView(task);
-      tv.render();
       taskViewContainer.appendChild(tv.node);
       taskViews.push(tv);
     });

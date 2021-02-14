@@ -1,20 +1,22 @@
-class Task {
-  constructor(title, description, dueDate, priority, project) {
-    this.title = title;
+import ModelBase from './modelBase';
+import TaskView from '../view/task_view';
+
+class Task extends ModelBase {
+  constructor(title, parent, description, dueDate, priority) {
+    super(title, parent);
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.project = project;
     this.isComplete = false;
+  }
+
+  makeView() {
+    return TaskView(this);
   }
 
   setIsComplete(value) {
     this.isComplete = value;
-    // console.log(`${this.title}: is ${this.isComplete ? '' : 'not '}complete`);
-  }
-
-  delete() {
-    this.project.removeTask(this);
+    // console.log(`${this.title} is ${this.isComplete ? '' : 'not '}complete`);
   }
 }
 
@@ -57,10 +59,10 @@ const taskMock = (function taskMock() {
   function getMockTask(project) {
     return new Task(
       _getRandom(_testTitles),
+      project,
       _getRandom(_testDescriptions),
       _getRandomDate(),
       _getRandom(priorities),
-      project,
     );
   }
 

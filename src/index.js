@@ -5,17 +5,18 @@ import { taskMock } from './model/task';
 import Project from './model/project';
 import DirectoryView from './view/dir_view';
 
+const projViewCntr = document.querySelector('.main-view');
+
 const testProjects = [
-  new Project('Test Project', 'My stupid test project'),
-  new Project('Test 2', 'My SECOND stupid test project'),
-  new Project('This real project', '(jk, it\'s another test)'),
+  new Project('Test Project', projViewCntr, 'My stupid test project'),
+  new Project('Test 2', projViewCntr, 'My SECOND stupid test project'),
+  new Project('This real project', projViewCntr, '(jk, it\'s another test)'),
 ];
 
 testProjects.forEach((testProject) => {
   const tasks = taskMock.getMockTasks(7, testProject);
-  testProject.addTask(...tasks);
+  testProject.addChild(...tasks);
 });
-const projectViewContainer = document.querySelector('.main-view');
-const sideBar = DirectoryView(testProjects, projectViewContainer);
+const sideBar = DirectoryView(testProjects, projViewCntr);
 
 document.querySelector('.sidebar-container').appendChild(sideBar.node);

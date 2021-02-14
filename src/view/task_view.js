@@ -47,6 +47,7 @@ const taskView = (task) => {
   };
 
   _initListeners();
+  render();
 
   return {
     node, task, setHideOnComplete, render,
