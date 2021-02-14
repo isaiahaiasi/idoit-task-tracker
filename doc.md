@@ -1,3 +1,6 @@
+# Naming standards
+CSS classes that are just identifiers for plugging variables into, have an underscore prefix. Eg, to grab the element that should contain a task's title, I want can use myTaskView.querySelector('._title')
+
 # MODEL
 ## Project
 - title

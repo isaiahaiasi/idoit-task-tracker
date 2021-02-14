@@ -4,13 +4,22 @@ import './styles/style.css';
 import { taskMock } from './model/task';
 import Project from './model/project';
 import ProjectView from './view/project_view';
+import DirectoryView from './view/dir_view';
 
-const testProject = new Project('Test Project', 'My stupid test project');
-const tasks = taskMock.getMockTasks(7, testProject);
+const testProjects = [
+  new Project('Test Project', 'My stupid test project'),
+  new Project('Test 2', 'My SECOND stupid test project'),
+  new Project('This real project', '(jk, it\'s another test)'),
+];
 
-testProject.addTask(...tasks);
+testProjects.forEach((testProject) => {
+  const tasks = taskMock.getMockTasks(7, testProject);
+  testProject.addTask(...tasks);
+});
 
-const testProjectView = ProjectView(testProject);
+const sideBar = DirectoryView(testProjects);
+const testProjectView = ProjectView(testProjects[0]);
 
-document.body.appendChild(testProjectView.node);
+document.querySelector('.sidebar-container').appendChild(sideBar.node);
+document.querySelector('.main-view').appendChild(testProjectView.node);
 testProjectView.render();

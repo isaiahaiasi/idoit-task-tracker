@@ -24,9 +24,9 @@ const taskView = (task) => {
   };
 
   const render = () => {
-    node.querySelector('.task-title').textContent = task.title;
-    node.querySelector('.task-priority').textContent = task.priority;
-    node.querySelector('.task-due-date').textContent = task.dueDate;
+    node.querySelector('._title').textContent = task.title;
+    node.querySelector('._priority').textContent = task.priority;
+    node.querySelector('._due-date').textContent = task.dueDate;
   };
 
   const _initListeners = () => {

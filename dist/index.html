@@ -8,18 +8,34 @@
   <script defer src="bundle.js"></script>
 </head>
 <body>
+  <div class="sidebar-container"></div>
+  <div class="main-view"></div>
+
+  <template id="sidebar-template">
+    <div class="sidebar">
+      Projects:
+    </div>
+  </template>
+
+  <template id="project-preview-template">
+    <div class="project-preview">
+      <div class="_title"></div>
+    </div>
+  </template>
+
   <template id="task-template">
     <div class="task">
         <input type="checkbox" class="task-is-complete">
-        <div class="task-title">DEFAULT TITLE</div>
-        <div class="task-due-date">DEFAULT DUE DATE</div>
-        <div class="task-priority">DEFAULT PRIORITY</div>
+        <div class="_title">DEFAULT TITLE</div>
+        <div class="_due-date">DEFAULT DUE DATE</div>
+        <div class="_priority">DEFAULT PRIORITY</div>
         <div class="task-btns">
-          <button class="task-edit-btn">EDIT</button>
+          <button class="task-move-btn">MOVE</button>
           <button class="task-delete-btn">DELETE</button>
         </div>
     </div>
   </template>
+  
   <template id="project-template">
     <div class="project">
       <p class="project-title">DEFAULT TITLE</p>
