@@ -24,9 +24,17 @@
 }
 
 .card.selected {
-  background-color:whitesmoke;
+  background-color:rgb(204, 228, 255);
+  font-weight:bold;
 }
 
 .card {
   background:rgb(194, 194, 194);
+}
+
+@media only screen and (max-width: 450px) {
+  .task {
+    display: flex;
+    flex-direction: column;
+  }
 }

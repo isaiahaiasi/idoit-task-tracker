@@ -17,8 +17,8 @@
     </div>
   </template>
 
-  <template id="project-preview-template">
-    <div class="project-preview card clickable">
+  <template id="item-preview-template">
+    <div class="item-preview card clickable">
       <div class="_title"></div>
     </div>
   </template>
@@ -42,6 +42,24 @@
       <p class="project-description">DEFAULT TITLE</p>
       <input type="checkbox" class="hide-complete-chkbx">HIDE COMPLETE</button>
       <div class="project-tasks-container"></div>
+    </div>
+  </template>
+
+  <template id="add-task-modal-template">
+    <div class="add-task modal">
+      <p>Add Task</p>
+      <input type="text" name="task-title">
+      <label for="task-title">Title: </label>
+      <input type="text-field" name="task-description">
+      <label for="task-description">Description: </label>
+      <input type="date" name="task-due-date">
+      <label for="task-due-date">Due:</label>
+      <label for="priority">Priority:</label>
+      <select name="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
     </div>
   </template>
 </body>

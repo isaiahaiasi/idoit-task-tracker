@@ -1,24 +1,20 @@
-import { removeAllChildren } from './view_utils';
-import ProjectView from './project_view';
-
-const DirectoryItem = (project, contentContainer) => {
-  const projectPreviewTemplate = document.querySelector('#project-preview-template');
-  const projectView = ProjectView(project);
+const DirectoryItem = (itemModel, contentContainer) => {
+  const projectPreviewTemplate = document.querySelector('#item-preview-template');
+  const itemView = itemModel.makeView();
 
   const node = projectPreviewTemplate.content
-    .querySelector('.project-preview')
+    .querySelector('.item-preview')
     .cloneNode(true);
-  node.querySelector('._title').textContent = project.title;
+  node.querySelector('._title').textContent = itemModel.title;
 
   const select = () => {
-    removeAllChildren(contentContainer);
-    contentContainer.appendChild(projectView.node);
-    projectView.render();
+    contentContainer.appendChild(itemView.node);
+    itemView.render();
     node.classList.add('selected');
   };
 
   const deselect = () => {
-    projectView.node.remove();
+    itemView.node.remove();
     node.classList.remove('selected');
   };
 
