@@ -22,22 +22,22 @@ const DirectoryItem = (itemModel, contentContainer) => {
 };
 
 // Directory (collection of projects, displayed in sidebar)
-const DirectoryView = (projects, contentContainer) => {
+const DirectoryView = (itemModels, contentContainer) => {
   const template = document.querySelector('#sidebar-template');
   const node = template.content.querySelector('.sidebar').cloneNode(true);
   const projectPreviews = [];
 
   // called on projectPreview.node.onClick
-  const _selectItem = (projectPreview) => {
+  const _selectItem = (itemPreview) => {
     projectPreviews.forEach((pv) => {
       pv.deselect();
     });
 
-    projectPreview.select();
+    itemPreview.select();
   };
 
-  projects.forEach((project) => {
-    const projectPreview = DirectoryItem(project, contentContainer);
+  itemModels.forEach((itemModel) => {
+    const projectPreview = DirectoryItem(itemModel, contentContainer);
     node.appendChild(projectPreview.node);
     projectPreviews.push(projectPreview);
 
@@ -50,4 +50,4 @@ const DirectoryView = (projects, contentContainer) => {
   return { node };
 };
 
-export { DirectoryView as default };
+export default DirectoryView;

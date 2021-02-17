@@ -5,7 +5,7 @@ import { taskMock } from './model/task';
 import Project from './model/project';
 import DirectoryView from './view/dir_view';
 
-const projViewCntr = document.querySelector('.main-view');
+const projViewCntr = document.querySelector('.projects-container');
 
 const testProjects = [
   new Project('Test Project', projViewCntr, 'My stupid test project'),
