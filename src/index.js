@@ -5,6 +5,9 @@ import { taskMock } from './model/task';
 import Project from './model/project';
 import DirectoryView from './view/dir_view';
 
+// ! TEMP
+import ModalView from './view/modal_view';
+
 const projViewCntr = document.querySelector('.projects-container');
 
 const testProjects = [

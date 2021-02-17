@@ -19,12 +19,10 @@
     
     <div class="main-view">
       <div class="projects-container"></div>
-      <div class="main-footer">
-        <button class="add-task-btn">Add Task</button>
-      </div>
     </div>
     
   </div>
+
   <template id="sidebar-template">
     <div class="sidebar">
       Projects:
@@ -56,11 +54,19 @@
       <p class="project-description">DEFAULT DESCRIPTION</p>
       <input type="checkbox" class="hide-complete-chkbx">HIDE COMPLETE</button>
       <div class="project-tasks-container"></div>
+      <div class="main-footer">
+        <button class="add-task-btn">Add Task</button>
+      </div>
     </div>
   </template>
 
-  <template id="add-task-modal-template">
-    <div class="add-task modal">
+  <template id="modal-templates">
+    <div class="modal">
+      <button class="close-btn">X</button>
+      <div class="model-content"></div>
+    </div>
+
+    <div class="add-task-form">
       <p>Add Task</p>
       <input type="text" name="task-title">
       <label for="task-title">Title: </label>
@@ -74,7 +80,9 @@
         <option value="medium">Medium</option>
         <option value="low">Low</option>
       </select>
+      <button class="submit-btn">Add Task</button>
     </div>
+
   </template>
 </body>
 </html>

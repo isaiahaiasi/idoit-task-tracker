@@ -1,5 +1,6 @@
 import TaskView from './task_view';
 import { removeAllChildren } from './view_utils';
+import ModalView from './modal_view';
 
 const ProjectView = (project) => {
   const template = document.querySelector('#project-template');
@@ -48,7 +49,15 @@ const ProjectView = (project) => {
     });
   };
 
+  const _initAddTaskButton = () => {
+    const addTaskBtn = node.querySelector('.add-task-btn');
+    addTaskBtn.addEventListener('click', () => {
+      ModalView('.add-task-form', () => console.log('submitted!'))();
+    });
+  };
+
   _initListeners();
+  _initAddTaskButton();
 
   return { node, render };
 };
