@@ -8,9 +8,23 @@
   <script defer src="bundle.js"></script>
 </head>
 <body>
-  <div class="sidebar-container"></div>
-  <div class="main-view"></div>
+  <div class=content-container>
 
+    <div class="sidebar">
+      <div class="sidebar-container"></div>
+      <div class="sidebar-footer">
+        <button class="add-project-btn">Add Project</button>
+      </div>
+    </div>
+    
+    <div class="main-view">
+      <div class="projects-container"></div>
+      <div class="main-footer">
+        <button class="add-task-btn">Add Task</button>
+      </div>
+    </div>
+    
+  </div>
   <template id="sidebar-template">
     <div class="sidebar">
       Projects:
@@ -24,7 +38,7 @@
   </template>
 
   <template id="task-template">
-    <div class="task">
+    <div class="task card">
         <input type="checkbox" class="task-is-complete clickable">
         <div class="_title">DEFAULT TITLE</div>
         <div class="_due-date">DEFAULT DUE DATE</div>
@@ -38,8 +52,8 @@
   
   <template id="project-template">
     <div class="project">
-      <p class="project-title">DEFAULT TITLE</p>
-      <p class="project-description">DEFAULT TITLE</p>
+      <h1 class="project-title">DEFAULT TITLE</h1>
+      <p class="project-description">DEFAULT DESCRIPTION</p>
       <input type="checkbox" class="hide-complete-chkbx">HIDE COMPLETE</button>
       <div class="project-tasks-container"></div>
     </div>
