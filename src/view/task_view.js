@@ -1,3 +1,5 @@
+import ModalView from './modal_view';
+
 const taskView = (task) => {
   const template = document.querySelector('#task-template');
   const taskTemplate = template.content.querySelector('.task');
@@ -41,8 +43,7 @@ const taskView = (task) => {
     const deleteBtn = node.querySelector('.task-delete-btn');
 
     deleteBtn.addEventListener('click', () => {
-      // TODO: Add confirmation modal
-      _deleteTask();
+      ModalView('.confirmation-form', _deleteTask).openModal();
     });
   };
 

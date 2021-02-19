@@ -52,12 +52,12 @@ const ProjectView = (project) => {
   const _initAddTaskButton = () => {
     const addTaskBtn = node.querySelector('.add-task-btn');
     addTaskBtn.addEventListener('click', () => {
-      ModalView('.add-task-form', () => console.log('submitted!'))();
+      ModalView('.add-task-form', () => console.log('submitted!')).openModal();
     });
   };
 
-  _initListeners();
   _initAddTaskButton();
+  _initListeners();
 
   return { node, render };
 };

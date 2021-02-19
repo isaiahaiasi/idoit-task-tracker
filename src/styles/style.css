@@ -4,16 +4,21 @@
 
 .sidebar {
   min-width:15rem;
+  border: 1px solid darkgrey;
+}
+
+.main-view {
+  margin:auto;
+  border: 1px solid darkgrey;
+  padding:1rem;
 }
 
 .task {
-  box-sizing:border-box;
   user-select:none;
   color: rgb(44, 44, 44);
   display:grid;
   grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   justify-content:space-between;
-  width:100%;
 }
 
 .task-is-complete::after {
@@ -30,9 +35,11 @@
 }
 
 .card {
+  box-sizing:border-box;
   padding:.75rem;
   margin:.2rem;
-  border: 1px solid black;
+  border: 1px solid rgb(80, 80, 80);
+  max-width:100%;
 }
 
 .card:hover {
@@ -42,6 +49,30 @@
 .card.selected {
   background-color:rgb(204, 228, 255);
   font-weight:bold;
+}
+
+.modal {
+  background: white;
+  border: 1px solid black;
+  padding: 2rem;
+
+  z-index:11;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  flex-direction: column;
+}
+
+.modal > button {
+  max-width: 3rem;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content button {
+  margin: .5rem;
 }
 
 @media only screen and (max-width: 450px) {

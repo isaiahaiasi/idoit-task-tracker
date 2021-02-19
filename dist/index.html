@@ -24,9 +24,7 @@
   </div>
 
   <template id="sidebar-template">
-    <div class="sidebar">
-      Projects:
-    </div>
+    <div class="sidebar"></div>
   </template>
 
   <template id="item-preview-template">
@@ -63,23 +61,43 @@
   <template id="modal-templates">
     <div class="modal">
       <button class="close-btn">X</button>
-      <div class="model-content"></div>
+      <div class="modal-content"></div>
+    </div>
+
+    <div class="confirmation-form">
+      Are you sure you want to delete?
+      <button class="submit-btn">Yes</button>
+    </div>
+
+    <div class="add-project-form">
+      <p>New Project</p>
+      <label for="task-title">Title: </label>
+      <input type="text" name="task-title">
+      <br>
+      <label for="task-description">Description: </label>
+      <input type="text-field" name="task-description">
+      <br>
+      <button class="submit-btn">Add Project</button>
     </div>
 
     <div class="add-task-form">
-      <p>Add Task</p>
-      <input type="text" name="task-title">
+      <p>New Task</p>
       <label for="task-title">Title: </label>
-      <input type="text-field" name="task-description">
+      <input type="text" name="task-title">
+      <br>
       <label for="task-description">Description: </label>
-      <input type="date" name="task-due-date">
+      <input type="text-field" name="task-description">
+      <br>
       <label for="task-due-date">Due:</label>
+      <input type="date" name="task-due-date">
+      <br>
       <label for="priority">Priority:</label>
       <select name="priority">
         <option value="high">High</option>
         <option value="medium">Medium</option>
         <option value="low">Low</option>
       </select>
+      <br>
       <button class="submit-btn">Add Task</button>
     </div>
 
