@@ -30,6 +30,7 @@ const taskView = (task) => {
     node.querySelector('._title').textContent = task.title;
     node.querySelector('._priority').textContent = task.priority;
     node.querySelector('._due-date').textContent = task.dueDate;
+    node.querySelector('._description').textContent = task.description;
   };
 
   const _initListeners = () => {
@@ -48,11 +49,21 @@ const taskView = (task) => {
     });
   };
 
+  const toggleExpanded = (bool) => {
+    if (bool === undefined) {
+      node.classList.toggle('task-expanded');
+    } else if (bool === true) {
+      node.classList.add('task-expanded');
+    } else {
+      node.classList.remove('task-expanded');
+    }
+  };
+
   _initListeners();
   render();
 
   return {
-    node, task, setHideOnComplete, render,
+    node, task, setHideOnComplete, render, toggleExpanded,
   };
 };
 

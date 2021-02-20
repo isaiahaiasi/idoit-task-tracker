@@ -21,6 +21,15 @@
   justify-content:space-between;
 }
 
+.task-expanded-content {
+  display:none;
+  grid-column: 1 / span 5;
+}
+
+.task-expanded .task-expanded-content {
+  display:block;
+}
+
 .task-is-complete::after {
   content:'__done?';
 }

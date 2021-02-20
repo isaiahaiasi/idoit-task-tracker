@@ -17,12 +17,23 @@ const ProjectView = (project) => {
     });
   };
 
+  const _expandClass = (taskView) => {
+    taskViews.forEach((tv) => {
+      if (tv === taskView) {
+        taskView.toggleExpanded();
+      } else {
+        tv.toggleExpanded(false);
+      }
+    });
+  };
+
   const _renderTasks = (taskViewContainer) => {
     removeAllChildren(taskViewContainer);
     taskViews.splice(0, taskViews.length);
 
     project.children.forEach((task) => {
       const tv = TaskView(task);
+      tv.node.addEventListener('click', () => _expandClass(tv));
       taskViewContainer.appendChild(tv.node);
       taskViews.push(tv);
     });
