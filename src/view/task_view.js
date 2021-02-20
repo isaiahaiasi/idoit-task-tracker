@@ -1,3 +1,4 @@
+import { format as dateFormat } from 'date-fns';
 import ModalView from './modal_view';
 
 const taskView = (task) => {
@@ -30,8 +31,12 @@ const taskView = (task) => {
   const render = () => {
     node.querySelector('._title').textContent = task.title;
     node.querySelector('._priority').textContent = task.priority;
-    node.querySelector('._due-date').textContent = task.dueDate;
     node.querySelector('._description').textContent = task.description;
+    if (task.dueDate != null) {
+      node.querySelector('._due-date').textContent = dateFormat(task.dueDate, 'MM/dd/yyyy');
+    } else {
+      node.querySelector('._due-date').textContent = '';
+    }
   };
 
   const _initListeners = () => {

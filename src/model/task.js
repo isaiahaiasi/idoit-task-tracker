@@ -53,7 +53,7 @@ const taskMock = (function taskMock() {
     const rMonth = Math.floor(Math.random() * 12);
     const rDay = Math.floor(Math.random() * 30);
     const rYear = 2021;
-    return `${rMonth}/${rDay}/${rYear}`;
+    return new Date(rYear, rMonth, rDay);
   };
 
   function getMockTask(project) {

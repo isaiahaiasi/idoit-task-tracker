@@ -69,8 +69,10 @@ const ProjectView = (project) => {
   const _handleAddTask = (form) => {
     const title = form.querySelector('input[name="task-title"]').value;
     const description = form.querySelector('input[name="task-description"]').value;
-    const dueDate = form.querySelector('input[name="task-due-date"]').value;
     const priority = form.querySelector('select[name="task-priority"]').value;
+
+    const formDate = form.querySelector('input[name="task-due-date"]').value;
+    const dueDate = formDate ? new Date(formDate) : null;
 
     // Validation
     if (!title) {
