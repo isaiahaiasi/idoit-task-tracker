@@ -28,23 +28,24 @@
   </template>
 
   <template id="item-preview-template">
-    <div class="item-preview card underline clickable">
+    <div class="item-preview card underline interactable">
       <div class="_title"></div>
     </div>
   </template>
 
   <template id="task-template">
-    <div class="task card underline">
-        <input type="checkbox" class="task-is-complete clickable">
-        <div class="_title">DEFAULT TITLE</div>
-        <div class="_due-date">DEFAULT DUE DATE</div>
-        <div class="_priority">DEFAULT PRIORITY</div>
+    <div class="task card underline interactable">
+        <input type="checkbox" class="task-is-complete">
+        <div class="_title task-item-pad">DEFAULT TITLE</div>
+        <div class="_due-date task-item-pad">DEFAULT DUE DATE</div>
+        <div class="_priority task-item-pad">DEFAULT PRIORITY</div>
         <div class="task-btns">
-          <button class="task-move-btn btn-circle">M</button>
-          <button class="task-delete-btn btn-circle">D</button>
+          <button class="task-expand-btn btn-circle">></button>
+          <button class="task-move-btn btn-circle">::</button>
         </div>
         <div class="task-expanded-content">
           <div class="_description">DEFAULT DESCRIPTION</div>
+          <button class="task-delete-btn btn-circle">X</button>
         </div>
     </div>
   </template>

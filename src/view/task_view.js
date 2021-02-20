@@ -4,6 +4,7 @@ const taskView = (task) => {
   const template = document.querySelector('#task-template');
   const taskTemplate = template.content.querySelector('.task');
   const node = taskTemplate.cloneNode(true);
+  const expandBtn = node.querySelector('.task-expand-btn');
 
   let _hideWhenComplete = false;
 
@@ -66,7 +67,7 @@ const taskView = (task) => {
   render();
 
   return {
-    node, task, setHideOnComplete, render, toggleExpanded,
+    node, task, setHideOnComplete, render, toggleExpanded, expandBtn,
   };
 };
 
