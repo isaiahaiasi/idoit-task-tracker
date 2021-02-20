@@ -10,6 +10,7 @@ const taskView = (task) => {
   const _deleteTask = () => {
     task.delete();
     node.remove();
+    return true;
   };
 
   const _updateHiddenState = () => {
