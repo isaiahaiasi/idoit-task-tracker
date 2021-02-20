@@ -68,6 +68,38 @@ const taskView = (task) => {
     }
   };
 
+  const _handleEditTask = (form) => {
+    const title = form.querySelector('input[name="task-title"]').value;
+    const description = form.querySelector('input[name="task-description"]').value;
+    const priority = form.querySelector('select[name="task-priority"]').value;
+
+    const formDate = form.querySelector('input[name="task-due-date"]').value;
+    const dueDate = formDate ? new Date(formDate) : null;
+
+    // Validation
+    if (!title) {
+      return false;
+    }
+
+    task.setTitle(title);
+    task.setDescription(description);
+    task.setPriority(priority);
+    task.setDueDate(dueDate);
+
+    render();
+
+    return true;
+  };
+
+  const _initEditTaskButton = () => {
+    const editTaskBtn = node.querySelector('.task-edit-btn');
+    editTaskBtn.addEventListener('click', () => {
+      ModalView('.add-task-form', _handleEditTask).openModal();
+    });
+  };
+
+  _initEditTaskButton();
+
   _initListeners();
   render();
 

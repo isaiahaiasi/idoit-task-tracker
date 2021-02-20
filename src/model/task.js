@@ -18,6 +18,26 @@ class Task extends ModelBase {
     this.isComplete = value;
     // console.log(`${this.title} is ${this.isComplete ? '' : 'not '}complete`);
   }
+
+  setTitle(title) {
+    this.title = title;
+  }
+
+  setDescription(description) {
+    this.description = description;
+  }
+
+  setDueDate(dueDate) {
+    if (!dueDate) {
+      this.dueDate = null;
+    } else {
+      this.dueDate = dueDate;
+    }
+  }
+
+  setPriority(priority) {
+    this.priority = priority;
+  }
 }
 
 const priorities = Object.freeze([
