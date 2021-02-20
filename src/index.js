@@ -1,4 +1,5 @@
 //! STYLE IMPORTS
+import './styles/reset.css';
 import './styles/style.css';
 
 import { taskMock } from './model/task';

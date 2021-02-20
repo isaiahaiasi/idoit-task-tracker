@@ -8,11 +8,12 @@
   <script defer src="bundle.js"></script>
 </head>
 <body>
-  <div class=content-container>
+  <div class="taskbar">
+    <div class="taskbar-img"></div>
+  </div>
 
-    <div class="sidebar">
-      <div class="sidebar-container"></div>
-    </div>
+  <div class="content-container">
+    <div class="sidebar-container"></div>
     
     <div class="main-view">
       <div class="projects-container"></div>
@@ -22,25 +23,25 @@
 
   <template id="sidebar-template">
     <div class="sidebar">
-        <button class="add-project-btn">Add Project</button>
+        <button class="add-project-btn card">Add Project</button>
     </div>
   </template>
 
   <template id="item-preview-template">
-    <div class="item-preview card clickable">
+    <div class="item-preview card underline clickable">
       <div class="_title"></div>
     </div>
   </template>
 
   <template id="task-template">
-    <div class="task card">
+    <div class="task card underline">
         <input type="checkbox" class="task-is-complete clickable">
         <div class="_title">DEFAULT TITLE</div>
         <div class="_due-date">DEFAULT DUE DATE</div>
         <div class="_priority">DEFAULT PRIORITY</div>
         <div class="task-btns">
-          <button class="task-move-btn">MOVE</button>
-          <button class="task-delete-btn">DELETE</button>
+          <button class="task-move-btn btn-circle">M</button>
+          <button class="task-delete-btn btn-circle">D</button>
         </div>
         <div class="task-expanded-content">
           <div class="_description">DEFAULT DESCRIPTION</div>
@@ -55,14 +56,14 @@
       <input type="checkbox" class="hide-complete-chkbx">HIDE COMPLETE</button>
       <div class="project-tasks-container"></div>
       <div class="main-footer">
-        <button class="add-task-btn">Add Task</button>
+        <button class="add-task-btn card">Add Task</button>
       </div>
     </div>
   </template>
 
   <template id="modal-templates">
     <div class="modal">
-      <button class="close-btn">X</button>
+      <button class="close-btn btn-circle">X</button>
       <div class="modal-content"></div>
     </div>
 

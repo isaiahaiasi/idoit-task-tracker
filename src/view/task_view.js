@@ -52,10 +52,13 @@ const taskView = (task) => {
   const toggleExpanded = (bool) => {
     if (bool === undefined) {
       node.classList.toggle('task-expanded');
+      node.classList.toggle('selected');
     } else if (bool === true) {
       node.classList.add('task-expanded');
+      node.classList.add('selected');
     } else {
       node.classList.remove('task-expanded');
+      node.classList.remove('selected');
     }
   };
 
