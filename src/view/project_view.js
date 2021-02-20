@@ -1,4 +1,5 @@
 import TaskView from './task_view';
+import Task from '../model/task';
 import { removeAllChildren } from './view_utils';
 import ModalView from './modal_view';
 
@@ -41,6 +42,11 @@ const ProjectView = (project) => {
     _renderTasks(taskViewContainer);
   };
 
+  const _addTask = (task) => {
+    project.addChild(task);
+    render();
+  };
+
   const _initListeners = () => {
     const hideCompleteChkbx = node.querySelector('.hide-complete-chkbx');
     hideCompleteChkbx.addEventListener('change', () => {
@@ -49,10 +55,27 @@ const ProjectView = (project) => {
     });
   };
 
+  const _handleAddTask = (form) => {
+    const title = form.querySelector('input[name="task-title"]').value;
+    const description = form.querySelector('input[name="task-description"]').value;
+    const dueDate = form.querySelector('input[name="task-due-date"]').value;
+    const priority = form.querySelector('select[name="task-priority"]').value;
+
+    // Validation
+    if (!title) {
+      return false;
+    }
+
+    const newTask = new Task(title, project, description, dueDate, priority);
+    _addTask(newTask);
+
+    return true;
+  };
+
   const _initAddTaskButton = () => {
     const addTaskBtn = node.querySelector('.add-task-btn');
     addTaskBtn.addEventListener('click', () => {
-      ModalView('.add-task-form', () => console.log('submitted!')).openModal();
+      ModalView('.add-task-form', _handleAddTask).openModal();
     });
   };
 
