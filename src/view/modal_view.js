@@ -1,11 +1,18 @@
-// params:
+// ! The current implementation does NOT allow for passing validation errors
+// * params:
 //   - selector for modal content element (should be in 'modal' template)
 //   - method to attach to button
 //     - takes the modal content *element* as param
 //     - returns: true/false whether to close the modal (for validation)
-// returns: the function that opens the modal
-// ! This method does NOT allow for passing validation errors
-const ModalView = (templateContentSelector, submitFunc) => {
+// TODO:
+//   - options: an object with optional properties:
+//     - init: a function that is run to perform any modal initialization logic
+//     - titleText: replaces the default title text
+//     - btnText: replaces the default submit button text
+//     TODO: options for more buttons??
+// * returns: the function that opens the modal
+
+const ModalView = (templateContentSelector, submitFunc, options) => {
   const modalTemplates = document.querySelector('#modal-templates').content;
   const modal = modalTemplates.querySelector('.modal').cloneNode(true);
 
@@ -19,6 +26,10 @@ const ModalView = (templateContentSelector, submitFunc) => {
   resetModalContent();
 
   modal.querySelector('.modal-content').appendChild(modalContent);
+
+  if (options && options.init) {
+    options.init(modalContent);
+  }
 
   const openModal = () => {
     document.body.appendChild(modal);

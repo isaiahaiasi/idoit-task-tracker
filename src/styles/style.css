@@ -48,6 +48,10 @@ button:hover {
 
 }
 
+input[type="text"] {
+  width:100%;
+}
+
 input[type="checkbox" i] {
   --checkbox-size: 1rem;
   height:var(--checkbox-size);

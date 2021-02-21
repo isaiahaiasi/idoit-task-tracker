@@ -94,7 +94,26 @@ const taskView = (task) => {
   const _initEditTaskButton = () => {
     const editTaskBtn = node.querySelector('.task-edit-btn');
     editTaskBtn.addEventListener('click', () => {
-      ModalView('.add-task-form', _handleEditTask).openModal();
+      const options = {
+        init: (modalContent) => {
+          const title = modalContent.querySelector('.modal-title');
+          title.textContent = 'Edit task';
+          const submitBtn = modalContent.querySelector('.submit-btn');
+          submitBtn.textContent = 'Save task';
+
+          // TODO: set value of inputs/select to what they currently are!!!
+          const modTitle = modalContent.querySelector('input[name="task-title"]');
+          const modDescription = modalContent.querySelector('input[name="task-description"]');
+          const modPriority = modalContent.querySelector('select[name="task-priority"]');
+          const modFormDate = modalContent.querySelector('input[name="task-due-date"]');
+
+          modTitle.value = task.title;
+          modDescription.value = task.description;
+          modPriority.value = task.priority;
+          modFormDate.value = dateFormat(task.dueDate, 'yyyy-MM-dd');
+        },
+      };
+      ModalView('.add-task-form', _handleEditTask, options).openModal();
     });
   };
 
