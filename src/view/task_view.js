@@ -1,7 +1,7 @@
 import { format as dateFormat } from 'date-fns';
 import ModalView from './modal_view';
 
-const taskView = (task) => {
+const taskView = (task, project) => {
   const template = document.querySelector('#task-template');
   const taskTemplate = template.content.querySelector('.task');
   const node = taskTemplate.cloneNode(true);
@@ -10,7 +10,7 @@ const taskView = (task) => {
   let _hideWhenComplete = false;
 
   const _deleteTask = () => {
-    task.delete();
+    project.deleteChild(task);
     node.remove();
     return true;
   };

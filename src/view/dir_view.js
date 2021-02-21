@@ -81,7 +81,7 @@ const DirectoryView = (itemModels, contentContainer) => {
       return false;
     }
 
-    const newProject = new Project(title, null, description);
+    const newProject = new Project(title, description);
     _addItem(newProject);
     return true;
   };

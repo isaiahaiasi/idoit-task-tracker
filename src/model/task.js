@@ -2,8 +2,8 @@ import ModelBase from './modelBase';
 import TaskView from '../view/task_view';
 
 class Task extends ModelBase {
-  constructor(title, parent, description, dueDate, priority) {
-    super(title, parent);
+  constructor(title, description, dueDate, priority) {
+    super(title);
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
@@ -77,20 +77,19 @@ const taskMock = (function taskMock() {
     return newDate;
   };
 
-  function getMockTask(project) {
+  function getMockTask() {
     return new Task(
       _getRandom(_testTitles),
-      project,
       _getRandom(_testDescriptions),
       _getRandomDate(),
       _getRandom(priorities),
     );
   }
 
-  function getMockTasks(num, project) {
+  function getMockTasks(num) {
     const mocks = [];
     for (let i = 0; i < num; i += 1) {
-      mocks.push(getMockTask(project));
+      mocks.push(getMockTask());
     }
     return mocks;
   }

@@ -32,7 +32,7 @@ const ProjectView = (project) => {
     taskViews.splice(0, taskViews.length);
 
     project.children.forEach((task) => {
-      const tv = TaskView(task);
+      const tv = TaskView(task, project);
       tv.expandBtn.addEventListener('click', () => _expandClass(tv));
       taskViewContainer.appendChild(tv.node);
       taskViews.push(tv);
@@ -83,7 +83,7 @@ const ProjectView = (project) => {
       return false;
     }
 
-    const newTask = new Task(title, project, description, dueDate, priority);
+    const newTask = new Task(title, description, dueDate, priority);
     _addTask(newTask);
 
     return true;

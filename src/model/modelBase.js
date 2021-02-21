@@ -1,21 +1,11 @@
 class ModelBase {
-  constructor(title, parent, children = []) {
+  constructor(title, children = []) {
     this.title = title;
-    this.parent = parent;
     this.children = children;
   }
 
   makeView() {
     console.error(`${this.title} has not implemented its makeView method!`);
-  }
-
-  delete() {
-    if (!this.parent) {
-      console.error(`Tried to delete ${this.title}, but parent doesn't exist!`);
-      return;
-    }
-
-    this.parent.deleteChild(this);
   }
 
   addChild(..._children) {
