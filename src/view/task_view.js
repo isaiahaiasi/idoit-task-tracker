@@ -73,8 +73,12 @@ const taskView = (task) => {
     const description = form.querySelector('input[name="task-description"]').value;
     const priority = form.querySelector('select[name="task-priority"]').value;
 
-    const formDate = form.querySelector('input[name="task-due-date"]').value;
-    const dueDate = formDate ? new Date(formDate) : null;
+    const formDate = form.querySelector('input[name="task-due-date"]')
+      .value
+      .split('-');
+    const dueDate = formDate
+      ? new Date(formDate[0], formDate[1] - 1, formDate[2])
+      : null;
 
     // Validation
     if (!title) {
