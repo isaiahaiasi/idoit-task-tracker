@@ -48,7 +48,7 @@ const taskView = (task) => {
       _updateHiddenState();
     });
 
-    const deleteBtn = node.querySelector('.task-delete-btn');
+    const deleteBtn = node.querySelector('.delete-btn');
 
     deleteBtn.addEventListener('click', () => {
       ModalView('.confirmation-form', _deleteTask).openModal();
@@ -101,7 +101,6 @@ const taskView = (task) => {
           const submitBtn = modalContent.querySelector('.submit-btn');
           submitBtn.textContent = 'Save task';
 
-          // TODO: set value of inputs/select to what they currently are!!!
           const modTitle = modalContent.querySelector('input[name="task-title"]');
           const modDescription = modalContent.querySelector('input[name="task-description"]');
           const modPriority = modalContent.querySelector('select[name="task-priority"]');
@@ -110,9 +109,13 @@ const taskView = (task) => {
           modTitle.value = task.title;
           modDescription.value = task.description;
           modPriority.value = task.priority;
-          modFormDate.value = dateFormat(task.dueDate, 'yyyy-MM-dd');
+          if (task.dueDate != null) {
+            // Date needs to be formatted in a precise way or it will not set
+            modFormDate.value = dateFormat(task.dueDate, 'yyyy-MM-dd');
+          }
         },
       };
+
       ModalView('.add-task-form', _handleEditTask, options).openModal();
     });
   };
@@ -127,4 +130,4 @@ const taskView = (task) => {
   };
 };
 
-export { taskView as default };
+export default taskView;

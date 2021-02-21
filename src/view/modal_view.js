@@ -1,11 +1,10 @@
 // ! The current implementation does NOT allow for passing validation errors
 // * params:
-//   - selector for modal content element (should be in 'modal' template)
-//   - method to attach to button
+//   - SELECTOR for modal content element (should be in 'modal' template)
+//   - METHOD to attach to button
 //     - takes the modal content *element* as param
 //     - returns: true/false whether to close the modal (for validation)
-// TODO:
-//   - options: an object with optional properties:
+//   - OPTIONS: an object with optional properties:
 //     - init: a function that is run to perform any modal initialization logic
 //     - titleText: replaces the default title text
 //     - btnText: replaces the default submit button text
@@ -47,7 +46,7 @@ const ModalView = (templateContentSelector, submitFunc, options) => {
     }
   });
 
-  const closeBtn = modal.querySelector('.close-btn');
+  const closeBtn = modal.querySelector('.delete-btn');
   closeBtn.addEventListener('click', closeModal);
 
   return { openModal };
