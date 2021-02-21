@@ -47,7 +47,11 @@ const ModalView = (templateContentSelector, submitFunc, options) => {
   });
 
   const closeBtn = modal.querySelector('.delete-btn');
-  closeBtn.addEventListener('click', closeModal);
+  const bg = modal.querySelector('.modal-bg');
+  const closeListeners = [closeBtn, bg];
+  closeListeners.forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
 
   return { openModal };
 };

@@ -74,7 +74,6 @@ const ProjectView = (project) => {
     const formDate = form.querySelector('input[name="task-due-date"]')
       .value
       .split('-');
-    console.log(formDate);
     const dueDate = (formDate[0] && formDate[1] && formDate[2])
       ? new Date(formDate[0], formDate[1] - 1, formDate[2])
       : null;
