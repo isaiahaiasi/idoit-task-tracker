@@ -44,7 +44,7 @@ const taskView = (task, project) => {
     isCompleteCheckbox.checked = task.isComplete;
     _updateHiddenState();
     isCompleteCheckbox.addEventListener('change', () => {
-      task.setIsComplete(isCompleteCheckbox.checked);
+      task.setState({ isComplete: isCompleteCheckbox.checked });
       _updateHiddenState();
     });
 
@@ -85,10 +85,9 @@ const taskView = (task, project) => {
       return false;
     }
 
-    task.setTitle(title);
-    task.setDescription(description);
-    task.setPriority(priority);
-    task.setDueDate(dueDate);
+    task.setState({
+      title, description, priority, dueDate,
+    });
 
     render();
 

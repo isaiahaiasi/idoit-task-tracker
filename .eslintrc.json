@@ -9,5 +9,10 @@
   },
   "env": {
     "browser": true
+  },
+  // required for optional chaining & null coalescing, 
+  // when using airbnb esling config
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

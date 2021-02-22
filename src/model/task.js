@@ -14,30 +14,28 @@ class Task extends ModelBase {
     return TaskView(this);
   }
 
-  setIsComplete(value) {
-    this.isComplete = value;
-    // console.log(`${this.title} is ${this.isComplete ? '' : 'not '}complete`);
-  }
-
-  setTitle(title) {
-    this.title = title;
-  }
-
-  setDescription(description) {
-    this.description = description;
-  }
-
-  setDueDate(dueDate) {
-    if (!dueDate) {
-      this.dueDate = null;
-    } else {
+  setState({
+    title, description, dueDate, priority, isComplete,
+  }) {
+    this.title = title ?? this.title;
+    this.description = description ?? this.description;
+    this.priority = priority ?? this.priority;
+    this.isComplete = isComplete ?? this.isComplete;
+    if (dueDate !== undefined) {
       this.dueDate = dueDate;
     }
+
+    this.stateUpdated();
   }
 
-  setPriority(priority) {
-    this.priority = priority;
-  }
+  // setDueDate(dueDate) {
+  //   if (!dueDate) {
+  //     this.dueDate = null;
+  //   } else {
+  //     this.dueDate = dueDate;
+  //   }
+  //   this.events.invoke(eventTokens.onStateUpdate);
+  // }
 }
 
 const priorities = Object.freeze([

@@ -1,15 +1,41 @@
+import EventHandler from '../events';
+
+const eventTokens = {
+  onStateUpdate: 'onStateUpdate',
+};
+
 class ModelBase {
   constructor(title, children = []) {
     this.title = title;
     this.children = children;
+
+    this.events = EventHandler();
+    this.events.publish(eventTokens.onStateUpdate);
+
+    this.children.forEach(this.subscribeToChildStateChange, this);
   }
 
   makeView() {
     console.error(`${this.title} has not implemented its makeView method!`);
   }
 
+  stateUpdated() {
+    console.log(this);
+    this.events.invoke(eventTokens.onStateUpdate);
+  }
+
+  subscribeToChildStateChange(child) {
+    console.log(`${this.title} subscribing to ${child.title} (supposedly)`);
+    child.events.subscribe(eventTokens.onStateUpdate, () => this.stateUpdated());
+  }
+
   addChild(..._children) {
-    _children.forEach((child) => this.children.push(child));
+    _children.forEach((child) => {
+      this.subscribeToChildStateChange(child);
+      this.children.push(child);
+    });
+
+    this.stateUpdated();
   }
 
   deleteChild(..._children) {
@@ -29,7 +55,10 @@ class ModelBase {
 
       this.children.splice(this.children.indexOf(child), 1);
     });
+
+    this.stateUpdated();
   }
 }
 
 export default ModelBase;
+export { eventTokens };

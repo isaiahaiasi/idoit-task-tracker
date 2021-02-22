@@ -4,10 +4,12 @@ import './styles/style.css';
 
 import { taskMock } from './model/task';
 import Project from './model/project';
+import Directory from './model/directory';
 import DirectoryView from './view/dir_view';
 
 //! TEMP
-import { save, load } from './save_handler';
+import { save, load } from './save_local';
+import SaveHandler from './save_handler';
 
 const testProjects = [
   new Project('Test Project', 'My stupid test project'),
@@ -20,11 +22,15 @@ testProjects.forEach((testProject) => {
   testProject.addChild(...tasks);
 });
 
+const directory = new Directory('RootDirectory', testProjects);
+
+// SAVE HANDLING
+const saveHandler = SaveHandler({ save, load }, directory);
+saveHandler.startListening();
+
+// POPULATING DOM
 const projViewCntr = document.querySelector('.projects-container');
 
-const sideBar = DirectoryView(testProjects, projViewCntr);
+const sideBar = DirectoryView(directory, projViewCntr);
 
 document.querySelector('.sidebar-container').appendChild(sideBar.node);
-
-save(testProjects);
-load();

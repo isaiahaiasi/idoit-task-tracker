@@ -1,25 +1,34 @@
-const SAVENAME = 'DIR_DATA';
+import { eventTokens } from './model/modelBase';
 
-// take an array of projects & save it to localStorage
-const save = (directory) => {
-  const dirJSON = JSON.stringify(directory);
-  window.localStorage.setItem(SAVENAME, dirJSON);
-};
+// Just takes a save method, & an object w an eventhandler
+const SaveHandler = ({ save, load }, directory) => {
+  const events = directory?.events;
+  const handleSave = () => {
+    save(directory);
+    console.log('saved');
+  };
+  const handleLoad = load;
 
-// return the saved array of projects from localStorage
-const load = () => {
-  const rawJSON = window.localStorage.getItem(SAVENAME);
-
-  if (!rawJSON) {
-    return false; // TODO ? or return test tasks...
+  if (!events) {
+    console.warn('Save handler was passed an invalid object:');
+    console.warn('no events property!');
+    return null;
   }
 
-  const rawDir = JSON.parse(rawJSON);
+  // listen for any state being updated, save when event invoked
+  const startListening = () => {
+    if (!events.subscribe(eventTokens.onStateUpdate, handleSave)) {
+      console.warn('Save handler was passed an invalid object:');
+      console.warn(`Couldn't subscribe to its ${eventTokens.onStateUpdate} event!`);
+    }
+  };
 
-  // TODO: convert raw objs to Projects & Tasks
+  // Stop listening to save event
+  const stopListening = () => {
+    events.unsubscribe(eventTokens.onStateUpdate, save);
+  };
 
-  console.log(rawDir);
-  return true;
+  return { startListening, stopListening, handleLoad };
 };
 
-export { save, load };
+export default SaveHandler;
