@@ -20,12 +20,10 @@ class ModelBase {
   }
 
   stateUpdated() {
-    console.log(this);
     this.events.invoke(eventTokens.onStateUpdate);
   }
 
   subscribeToChildStateChange(child) {
-    console.log(`${this.title} subscribing to ${child.title} (supposedly)`);
     child.events.subscribe(eventTokens.onStateUpdate, () => this.stateUpdated());
   }
 

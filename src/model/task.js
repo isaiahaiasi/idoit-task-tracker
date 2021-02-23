@@ -2,12 +2,12 @@ import ModelBase from './modelBase';
 import TaskView from '../view/task_view';
 
 class Task extends ModelBase {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, isComplete = false) {
     super(title);
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.isComplete = false;
+    this.isComplete = isComplete;
   }
 
   makeView() {
