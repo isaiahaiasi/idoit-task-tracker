@@ -8,7 +8,7 @@
 
   --col-cancel: #ff655c;
   --col-cancel-light:#fe8881;
-  --col-cancel-dark: darkred;
+  --col-cancel-dark: red;
 
   --col-shade-0: rgb(241, 241, 241);
   --col-shade-1: gainsboro;
@@ -132,11 +132,6 @@ label {
   background-color:var(--col-primary-light);
 }
 
-.input-grp {
-  display:flex;
-  margin: 1rem 0;
-}
-
 .btn-circle {
   --btn-size: 1.5rem;
   padding:0;
@@ -148,13 +143,13 @@ label {
 
 .delete-btn {
   background-color:var(--col-cancel);
-  border-color:var(--col-cancel-dark);
+  border:none;
   color:white;
   font-weight:bold;
 }
 
 .delete-btn:hover {
-  background-color:var(--col-cancel-light);
+  background-color:var(--col-cancel-dark);
 }
 
 /* * MAIN CONTAINERS 
@@ -241,6 +236,18 @@ label {
 
 .task-btns {
   text-align:end;
+}
+
+/* * MINOR MISC CLASSES */
+
+.input-grp {
+  display:flex;
+  margin: 1rem 0;
+}
+
+.item-preview {
+  display:flex;
+  justify-content:space-between;
 }
 
 /* * MODAL classes */

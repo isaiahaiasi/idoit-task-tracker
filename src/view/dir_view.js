@@ -1,8 +1,6 @@
 import Project from '../model/project';
 import ModalView from './modal_view';
 
-// ! Currently, this isn't doing a good job of separating DOM & logic,
-// ! B/c this "view" is where I'm storing all my projects
 // Tab for each project
 const DirectoryItem = (itemModel, contentContainer) => {
   const projectPreviewTemplate = document.querySelector('#item-preview-template');
@@ -12,6 +10,8 @@ const DirectoryItem = (itemModel, contentContainer) => {
     .querySelector('.item-preview')
     .cloneNode(true);
   node.querySelector('._title').textContent = itemModel.title;
+
+  const deleteBtn = node.querySelector('.delete-btn');
 
   const select = () => {
     contentContainer.appendChild(itemView.node);
@@ -24,7 +24,9 @@ const DirectoryItem = (itemModel, contentContainer) => {
     node.classList.remove('selected');
   };
 
-  return { node, select, deselect };
+  return {
+    node, select, deselect, deleteBtn, itemModel,
+  };
 };
 
 // Directory (collection of projects, displayed in sidebar)
@@ -32,6 +34,7 @@ const DirectoryView = (directory, contentContainer) => {
   const template = document.querySelector('#sidebar-template');
   const node = template.content.querySelector('.sidebar').cloneNode(true);
   let projectPreviews = [];
+  let selectedItem = directory.children[0];
 
   // called on projectPreview.node.onClick
   const _selectItem = (itemPreview) => {
@@ -40,6 +43,7 @@ const DirectoryView = (directory, contentContainer) => {
     });
 
     itemPreview.select();
+    selectedItem = itemPreview.itemModel;
   };
 
   const _clearItems = () => {
@@ -60,11 +64,20 @@ const DirectoryView = (directory, contentContainer) => {
       projectPreview.node.addEventListener('click', () => {
         _selectItem(projectPreview);
       });
+
+      projectPreview.deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // b/c the btn's container has the above click event listener
+        directory.deleteChild(itemModel);
+        _render();
+      });
     });
 
-    // ! TEMP
-    projectPreviews[0].select();
-    // (should track which index is active for re-rendering)
+    // Preserves the selected project when projectPreviews cleared, or when index of proj changes.
+    // If selected proj no longer exists, default to first index
+    _selectItem(
+      projectPreviews.find((pv) => pv.itemModel === selectedItem)
+      ?? projectPreviews[0],
+    );
   };
 
   const _addItem = (item) => {
@@ -77,12 +90,12 @@ const DirectoryView = (directory, contentContainer) => {
     const description = form.querySelector('input[name="project-description"]').value;
 
     // Validate form input
+    // TODO: Add actual validation
     if (title === '') {
       return false;
     }
 
-    const newProject = new Project(title, description);
-    _addItem(newProject);
+    _addItem(new Project(title, description));
     return true;
   };
 

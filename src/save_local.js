@@ -24,8 +24,6 @@ const load = () => {
 
   console.log('Attempting to load from localStorage');
 
-  console.log(rawJSON);
-
   const rawDir = JSON.parse(rawJSON);
   const dir = new Directory('Default directory');
 
