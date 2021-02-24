@@ -42,8 +42,8 @@ const DirectoryView = (directory, contentContainer) => {
       pv.deselect();
     });
 
-    itemPreview.select();
-    selectedItem = itemPreview.itemModel;
+    itemPreview?.select();
+    selectedItem = itemPreview?.itemModel;
   };
 
   const _clearItems = () => {
@@ -70,6 +70,7 @@ const DirectoryView = (directory, contentContainer) => {
         ModalView('.confirmation-form', () => {
           directory.deleteChild(itemModel);
           _render();
+          return true;
         }).openModal();
       });
     });
