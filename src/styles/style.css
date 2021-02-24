@@ -152,6 +152,16 @@ label {
   background-color:var(--col-cancel-dark);
 }
 
+.item-preview > .delete-btn {
+  opacity:0;
+  pointer-events:none;
+}
+
+.item-preview:hover > .delete-btn {
+  opacity:1;
+  pointer-events:initial;
+}
+
 /* * MAIN CONTAINERS 
     - .content-container
     - .taskbar

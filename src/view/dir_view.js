@@ -67,8 +67,10 @@ const DirectoryView = (directory, contentContainer) => {
 
       projectPreview.deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation(); // b/c the btn's container has the above click event listener
-        directory.deleteChild(itemModel);
-        _render();
+        ModalView('.confirmation-form', () => {
+          directory.deleteChild(itemModel);
+          _render();
+        }).openModal();
       });
     });
 
