@@ -89,16 +89,18 @@ const DirectoryView = (directory, contentContainer) => {
   };
 
   const _handleProjectForm = (form) => {
-    const title = form.querySelector('input[name="project-title"]').value;
-    const description = form.querySelector('input[name="project-description"]').value;
+    const title = form.querySelector('input[name="project-title"]');
+    const description = form.querySelector('input[name="project-description"]');
 
-    // Validate form input
-    // TODO: Add actual validation
-    if (title === '') {
+    const titleValidation = form.querySelector('.field-validation[for="project-title"]');
+    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
+
+    if (!title.value) {
+      titleValidation.classList.add('reveal');
       return false;
     }
 
-    _addItem(new Project(title, description));
+    _addItem(new Project(title.value, description.value));
     return true;
   };
 

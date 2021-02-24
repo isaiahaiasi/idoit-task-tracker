@@ -69,7 +69,7 @@ const taskView = (task, project) => {
   };
 
   const _handleEditTask = (form) => {
-    const title = form.querySelector('input[name="task-title"]').value;
+    const title = form.querySelector('input[name="task-title"]');
     const description = form.querySelector('input[name="task-description"]').value;
     const priority = form.querySelector('select[name="task-priority"]').value;
 
@@ -81,12 +81,16 @@ const taskView = (task, project) => {
       : null;
 
     // Validation
-    if (!title) {
+    const titleValidation = form.querySelector('.field-validation[for="task-title"]');
+    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
+
+    if (!title.value) {
+      titleValidation.classList.add('reveal');
       return false;
     }
 
     task.setState({
-      title, description, priority, dueDate,
+      title: title.value, description, priority, dueDate,
     });
 
     render();

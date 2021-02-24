@@ -66,10 +66,11 @@ const ProjectView = (project) => {
     });
   };
 
+  // ! This definitely doesn't feel very DRY...
   const _handleAddTask = (form) => {
-    const title = form.querySelector('input[name="task-title"]').value;
-    const description = form.querySelector('input[name="task-description"]').value;
-    const priority = form.querySelector('select[name="task-priority"]').value;
+    const title = form.querySelector('input[name="task-title"]');
+    const description = form.querySelector('input[name="task-description"]');
+    const priority = form.querySelector('select[name="task-priority"]');
 
     const formDate = form.querySelector('input[name="task-due-date"]')
       .value
@@ -79,11 +80,18 @@ const ProjectView = (project) => {
       : null;
 
     // Validation
-    if (!title) {
+    const titleValidation = form.querySelector('.field-validation[for="task-title"]');
+    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
+
+    if (!title.value) {
+      titleValidation.classList.add('reveal');
       return false;
     }
 
-    const newTask = new Task(title, description, dueDate, priority);
+    const newTask = new Task(
+      title.value, description.value, dueDate, priority.value,
+    );
+
     _addTask(newTask);
 
     return true;

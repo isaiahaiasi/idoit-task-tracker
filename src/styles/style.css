@@ -180,7 +180,7 @@ label {
 }
 
 .sidebar-container {
-  min-height:calc(100vh - 3.6rem);
+  min-height:calc(100vh - 3.6rem); /* subtract height of header & footer */
 }
 
 .taskbar {
@@ -262,12 +262,23 @@ label {
 
 .input-grp {
   display:flex;
-  margin: 1rem 0;
+  padding: .5rem 0;
 }
 
 .item-preview {
   display:flex;
   justify-content:space-between;
+}
+
+.field-validation {
+  color:var(--col-cancel-dark);
+  max-height:0;
+  overflow:hidden;
+  transition: 0.3s;
+}
+
+.field-validation.reveal {
+  max-height:2em;
 }
 
 /* * MODAL classes */
