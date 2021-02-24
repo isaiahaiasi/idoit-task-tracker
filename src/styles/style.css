@@ -19,7 +19,14 @@
 
   --col-underline: var(--col-shade-4);
 
-  --img-logo: url('../assets/idoitlogo.svg');
+  --trans-spd-default: .2s;
+
+  --svg-logo: url('../assets/idoitlogo.svg');
+  --svg-chevron: url('../assets/chevron.svg');
+  --svg-clear: url('../assets/clear.svg');
+  --svg-create: url('../assets/create.svg');
+  --svg-list: url('../assets/list.svg');
+  --img-gh-logo: url('../assets/githublogo.png');
   font-family:'Ubuntu', Verdana, Geneva, Tahoma, sans-serif;
 }
 /* * HTML TAGS */
@@ -39,14 +46,24 @@ p {
 }
 
 footer {
+  box-sizing:border-box;
   background:var(--col-primary);
   color:white;
   padding:.3rem;
+  padding-right:2rem;
+  text-align:right;
+  max-height:1.8rem;
+}
+
+footer a:visited {
+  color:white;
 }
 
 button {
+  cursor:pointer;
   box-sizing:border-box;
   padding:.5rem;
+  margin-top:.7rem;
   font-size:1rem;
   width:100%;
   border:1px solid black;
@@ -108,11 +125,18 @@ label {
 */
 
 .hidden {
-  display:none !important;
+  /* display:none !important; */
+  transform:scaleY(0);
+  max-height:0 !important;
+  overflow:hidden !important;
+  padding:0 !important;
+  margin:0 !important;
+  border: none !important;
+  transition:var(--trans-spd-default);
 }
 
 .underline {
-  border-bottom: 1px solid var(--col-underline) !important;
+  border-bottom: 1px solid var(--col-underline);
 }
 
 /* * UI CATEGORY CLASSES
@@ -128,6 +152,7 @@ label {
 
 .interactable {
   transition: .3s;
+  cursor:pointer;
 }
 
 .interactable:hover {
@@ -141,6 +166,7 @@ label {
 .btn-circle {
   --btn-size: 1.5rem;
   padding:0;
+  margin:0;
   border-width:2px;
   border-radius:50%;
   width:var(--btn-size);
@@ -149,6 +175,8 @@ label {
 
 .delete-btn {
   background-color:var(--col-cancel);
+  background-image:var(--svg-clear);
+  background-position:center;
   border:none;
   color:white;
   font-weight:bold;
@@ -156,6 +184,10 @@ label {
 
 .delete-btn:hover {
   background-color:var(--col-cancel-dark);
+}
+
+.add-project-btn {
+  margin:0;
 }
 
 .item-preview > .delete-btn {
@@ -180,7 +212,7 @@ label {
 }
 
 .sidebar-container {
-  min-height:calc(100vh - 3.6rem); /* subtract height of header & footer */
+  min-height:calc(100vh - 3.8rem); /* subtract height of header & footer */
 }
 
 .taskbar {
@@ -192,7 +224,7 @@ label {
 }
 
 .taskbar-img {
-  background: var(--img-logo);
+  background: var(--svg-logo);
   height:100%;
 }
 
@@ -221,6 +253,7 @@ label {
   display:grid;
   grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
   justify-content:space-between;
+  transition: var(--trans-spd-default);
 }
 
 .task-item-pad {
@@ -228,17 +261,27 @@ label {
 }
 
 .task-expanded-content {
-  display:none;
+  /* display:none; */
+  overflow:hidden;
+  pointer-events:none;
+  max-height:0;
   grid-column: 1 / span 5;
+  display:flex;
+  justify-content:space-between;
+  transition: var(--trans-spd-default);
 }
 
 .task-expanded .task-expanded-content {
+  pointer-events:unset;
   padding-top:.8rem;
-  display:flex;
-  justify-content:space-between;
+  max-height:2em;
 }
 
 .task-expand-btn {
+  border-width:0;
+  background-color:var(--col-shade-1);
+  background-image:var(--svg-chevron);
+  background-position:center;
   transition:.3s;
 }
 
@@ -246,6 +289,14 @@ label {
   transform: rotate(90deg);
   background-color:var(--col-primary);
   color:white;
+}
+
+.task-edit-btn {
+  border-width:0;
+  background-color:var(--col-shade-1);
+  background-size:80%;
+  background-image:var(--svg-create);
+  background-position:center;
 }
 
 .task-is-complete:checked ~ div,
@@ -268,6 +319,7 @@ label {
 .item-preview {
   display:flex;
   justify-content:space-between;
+  user-select: none;
 }
 
 .field-validation {
@@ -309,6 +361,22 @@ label {
   left:0;
   right:0;
   background:rgba(0,0,0,0.3);
+}
+/* * IMAGES */
+.gh-logo {
+  display:inline-block;
+  box-sizing:border-box;
+  background-image: var(--img-gh-logo);
+  background-size:contain;
+  background-repeat:no-repeat;
+  margin-left:.4rem;
+  padding:-.3rem;
+  height:1.3rem;
+  width:1.3rem;
+}
+
+footer span {
+  vertical-align:middle;
 }
 
 /* * MEDIA QUERIES */

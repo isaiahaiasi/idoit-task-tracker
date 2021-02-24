@@ -17,6 +17,7 @@ const taskView = (task, project) => {
 
   const _updateHiddenState = () => {
     if (_hideWhenComplete && task.isComplete) {
+      // node.style.maxHeight = node.offsetHeight;
       node.classList.add('hidden');
     } else {
       node.classList.remove('hidden');
@@ -36,35 +37,6 @@ const taskView = (task, project) => {
       node.querySelector('._due-date').textContent = dateFormat(task.dueDate, 'MM/dd/yyyy');
     } else {
       node.querySelector('._due-date').textContent = '';
-    }
-  };
-
-  const _initListeners = () => {
-    const isCompleteCheckbox = node.querySelector('.task-is-complete');
-    isCompleteCheckbox.checked = task.isComplete;
-    _updateHiddenState();
-    isCompleteCheckbox.addEventListener('change', () => {
-      task.setState({ isComplete: isCompleteCheckbox.checked });
-      _updateHiddenState();
-    });
-
-    const deleteBtn = node.querySelector('.delete-btn');
-
-    deleteBtn.addEventListener('click', () => {
-      ModalView('.confirmation-form', _deleteTask).openModal();
-    });
-  };
-
-  const toggleExpanded = (bool) => {
-    if (bool === undefined) {
-      node.classList.toggle('task-expanded');
-      node.classList.toggle('selected');
-    } else if (bool === true) {
-      node.classList.add('task-expanded');
-      node.classList.add('selected');
-    } else {
-      node.classList.remove('task-expanded');
-      node.classList.remove('selected');
     }
   };
 
@@ -100,7 +72,8 @@ const taskView = (task, project) => {
 
   const _initEditTaskButton = () => {
     const editTaskBtn = node.querySelector('.task-edit-btn');
-    editTaskBtn.addEventListener('click', () => {
+    editTaskBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const options = {
         init: (modalContent) => {
           const title = modalContent.querySelector('.modal-title');
@@ -127,7 +100,37 @@ const taskView = (task, project) => {
     });
   };
 
-  _initEditTaskButton();
+  const _initListeners = () => {
+    _initEditTaskButton();
+
+    const isCompleteCheckbox = node.querySelector('.task-is-complete');
+    isCompleteCheckbox.checked = task.isComplete;
+    _updateHiddenState();
+    isCompleteCheckbox.addEventListener('click', (e) => e.stopPropagation());
+    isCompleteCheckbox.addEventListener('change', () => {
+      task.setState({ isComplete: isCompleteCheckbox.checked });
+      _updateHiddenState();
+    });
+
+    const deleteBtn = node.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      ModalView('.confirmation-form', _deleteTask).openModal();
+    });
+  };
+
+  const toggleExpanded = (bool) => {
+    if (bool === undefined) {
+      node.classList.toggle('task-expanded');
+      node.classList.toggle('selected');
+    } else if (bool === true) {
+      node.classList.add('task-expanded');
+      node.classList.add('selected');
+    } else {
+      node.classList.remove('task-expanded');
+      node.classList.remove('selected');
+    }
+  };
 
   _initListeners();
   render();

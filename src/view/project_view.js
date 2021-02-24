@@ -33,7 +33,7 @@ const ProjectView = (project) => {
 
     project.children.forEach((task) => {
       const tv = TaskView(task, project);
-      tv.expandBtn.addEventListener('click', () => _expandClass(tv));
+      tv.node.addEventListener('click', () => _expandClass(tv));
       taskViewContainer.appendChild(tv.node);
       taskViews.push(tv);
     });
