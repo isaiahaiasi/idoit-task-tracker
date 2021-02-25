@@ -11,7 +11,7 @@ import Directory from './model/directory';
 import DirectoryView from './view/dir_view';
 
 //* SAVE/LOAD IMPORTS
-import { save, load } from './save_local';
+import saveLocal from './save_local';
 import SaveHandler from './save_handler';
 
 const generateDefaultDirectory = () => {
@@ -26,14 +26,12 @@ const generateDefaultDirectory = () => {
     const tasks = taskMock.getMockTasks(7, testProject);
     testProject.addChild(...tasks);
   });
-  return new Directory('RootDirectory', testProjects);
+  return new Directory({ title: 'RootDirectory', children: testProjects });
 };
-
-const directory = load() ?? generateDefaultDirectory();
-
 // SAVE HANDLING
-const saveHandler = SaveHandler({ save, load }, directory);
-saveHandler.startListening();
+const saveHandler = SaveHandler(saveLocal);
+
+const directory = saveHandler.handleLoad('DIRECTORY') ?? generateDefaultDirectory();
 
 // POPULATING DOM
 const projViewCntr = document.querySelector('.projects-container');

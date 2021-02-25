@@ -118,4 +118,6 @@ const CreateEventHandler = () => {
   };
 };
 
+export const globalEvents = CreateEventHandler();
+
 export default CreateEventHandler;

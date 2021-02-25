@@ -7,14 +7,17 @@ class Task extends ModelBase {
   }) {
     super({ title, id });
     this.description = description;
-    this.dueDate = dueDate;
     this.priority = priority;
     this.isComplete = isComplete;
+    this.dueDate = new Date(dueDate);
+    this.stateUpdated();
   }
 
   getSerializable() {
+    console.log(this.getID());
     return {
       ...super.getSerializable(),
+      Type: 'Task',
       description: this.description,
       dueDate: this.dueDate,
       priority: this.priority,
@@ -81,12 +84,12 @@ const taskMock = (function taskMock() {
   };
 
   function getMockTask() {
-    return new Task(
-      _getRandom(_testTitles),
-      _getRandom(_testDescriptions),
-      _getRandomDate(),
-      _getRandom(priorities),
-    );
+    return new Task({
+      title: _getRandom(_testTitles),
+      description: _getRandom(_testDescriptions),
+      dueDate: _getRandomDate(),
+      priority: _getRandom(priorities),
+    });
   }
 
   function getMockTasks(num) {

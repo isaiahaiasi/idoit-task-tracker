@@ -1,8 +1,9 @@
-import EventHandler from '../events';
+import EventHandler, { globalEvents } from '../events';
 import setID from '../getID';
 
 const eventTokens = {
   onStateUpdate: 'onStateUpdate',
+  onItemDelete: 'onItemDelete',
 };
 
 class ModelBase {
@@ -12,24 +13,20 @@ class ModelBase {
     this.children = children;
 
     this.events = EventHandler();
-    this.events.publish(eventTokens.onStateUpdate);
-
-    this.children.forEach(this.subscribeToChildStateChange, this);
+    // this.events.publish(eventTokens.onStateUpdate);
   }
 
   getID() {
     return this.id;
   }
 
-  // Return an object with only serializable state, & with child IDs instead of full children
+  // Return an object with only serializable state,
+  // & with child IDs instead of full children
   getSerializable() {
-    // const children = this.children.map((child) => child.id);
     return {
       id: this.id,
       title: this.title,
-      // ! TEMP: I want to be able to save instances individually,
-      // TODO: ... so this should map to child.id instead
-      children: this.children.map((child) => child.getSerializable()),
+      children: this.children.map((child) => child.getID()),
     };
   }
 
@@ -38,16 +35,12 @@ class ModelBase {
   }
 
   stateUpdated() {
-    this.events.invoke(eventTokens.onStateUpdate);
-  }
-
-  subscribeToChildStateChange(child) {
-    child.events.subscribe(eventTokens.onStateUpdate, () => this.stateUpdated());
+    // this.events.invoke(eventTokens.onStateUpdate, this);
+    globalEvents.invoke(eventTokens.onStateUpdate, this);
   }
 
   addChild(..._children) {
     _children.forEach((child) => {
-      this.subscribeToChildStateChange(child);
       this.children.push(child);
     });
 
@@ -56,7 +49,7 @@ class ModelBase {
 
   deleteChild(..._children) {
     if (this.children.length < 1) {
-      console.error(`Tried to delete a child of ${this.title}, but it doesn't have any children!`);
+      console.warn(`Tried to delete a child of ${this.title}, but it has no children!`);
       return;
     }
 
@@ -70,6 +63,8 @@ class ModelBase {
       }
 
       this.children.splice(this.children.indexOf(child), 1);
+
+      globalEvents.invoke(eventTokens.onItemDelete, child);
     });
 
     this.stateUpdated();

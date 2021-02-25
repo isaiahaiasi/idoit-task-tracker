@@ -1,55 +1,60 @@
+import ModelBase from './model/modelBase';
 import Task from './model/task';
 import Project from './model/project';
 import Directory from './model/directory';
 
-const SAVENAME = 'DIR_DATA';
+// save an item in localstorage at its ID's location
+const save = (saveableItem) => {
+  console.log(`saving ${saveableItem.title}`);
+  const dirJSON = JSON.stringify(saveableItem.getSerializable());
+  window.localStorage.setItem(saveableItem.getID(), dirJSON);
+};
 
-// take an array of projects & save it to localStorage
-const save = (directory) => {
-  console.log(`saving ${directory.title}`);
-  const dirJSON = JSON.stringify(directory.getSerializable());
-  window.localStorage.setItem(SAVENAME, dirJSON);
+// remove a localStorage key (ie, when the referenced obj is deleted)
+const remove = (saveableItem) => {
+  console.log(`removing ${saveableItem.title} from localStorage`);
+  saveableItem.children.forEach((child) => remove(child));
+  window.localStorage.removeItem(saveableItem.getID());
 };
 
 // return the saved array of projects from localStorage
-const load = () => {
+const load = (localStorageKey) => {
   console.log('Attempting to load from localStorage');
 
-  const rawJSON = window.localStorage.getItem(SAVENAME);
+  const itemJSON = window.localStorage.getItem(localStorageKey);
+  const itemLiteral = JSON.parse(itemJSON);
 
-  if (!rawJSON) {
-    console.log('Could not find localStorage data!');
+  if (!itemLiteral) {
+    console.log(`Could not find localStorage data for ${localStorageKey}!`);
     return null;
   }
 
-  console.log('Attempting to load from localStorage');
+  console.log(`loading ${itemLiteral.title}`);
 
-  const rawDir = JSON.parse(rawJSON);
-  const dir = new Directory({ title: 'Default directory' });
+  // recursively load all children
+  const children = itemLiteral.children.map((childID) => load(childID));
 
-  rawDir.children.forEach((project) => {
-    const children = [];
+  itemLiteral.children = children;
 
-    project.children.forEach((child) => {
-      children.push(new Task({
-        title: child.title,
-        description: child.description,
-        dueDate: new Date(child.dueDate),
-        priority: child.priority,
-        isComplete: child.isComplete,
-      }));
-    });
-
-    dir.addChild(new Project({
-      title: project.title,
-      description: project.description,
-      children,
-    }));
-  });
-
-  console.log(rawDir);
-  console.log(dir);
-  return dir;
+  let ItemConstructor;
+  switch (itemLiteral.Type) {
+    case 'Task':
+      ItemConstructor = Task;
+      break;
+    case 'Project':
+      ItemConstructor = Project;
+      break;
+    case 'Directory':
+      ItemConstructor = Directory;
+      break;
+    default:
+      console.log(`Did not find valid type for ${itemLiteral.title}`);
+      ItemConstructor = ModelBase;
+      break;
+  }
+  return new ItemConstructor(itemLiteral);
 };
 
-export { save, load };
+const saveLocal = { save, load, remove };
+
+export default saveLocal;

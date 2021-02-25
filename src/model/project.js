@@ -7,6 +7,15 @@ class Project extends ModelBase {
   }) {
     super({ title, children, id });
     this.description = description;
+    this.stateUpdated();
+  }
+
+  getSerializable() {
+    return {
+      ...super.getSerializable(),
+      Type: 'Project',
+      description: this.description,
+    };
   }
 
   makeView() {
