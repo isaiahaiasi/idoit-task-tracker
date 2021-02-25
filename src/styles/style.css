@@ -274,7 +274,7 @@ label {
 .task-expanded .task-expanded-content {
   pointer-events:unset;
   padding-top:.8rem;
-  max-height:2em;
+  max-height:3em;
 }
 
 .task-expand-btn {
@@ -283,6 +283,10 @@ label {
   background-image:var(--svg-chevron);
   background-position:center;
   transition:.3s;
+}
+
+.task-expanded-btn-container {
+  min-width:3.5rem;
 }
 
 .task-expanded .task-expand-btn {

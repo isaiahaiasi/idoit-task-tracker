@@ -17,9 +17,9 @@ import SaveHandler from './save_handler';
 const generateDefaultDirectory = () => {
   console.log('Generating defaults');
   const testProjects = [
-    new Project('Test Project', 'My stupid test project'),
-    new Project('Test 2', 'My SECOND stupid test project'),
-    new Project('This real project', '(jk, it\'s another test)'),
+    new Project({ title: 'Test Project', description: 'My stupid test project' }),
+    new Project({ title: 'Test 2', description: 'My SECOND stupid test project' }),
+    new Project({ title: 'This real project', description: '(jk, it\'s another test)' }),
   ];
 
   testProjects.forEach((testProject) => {

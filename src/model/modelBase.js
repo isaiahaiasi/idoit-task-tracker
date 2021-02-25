@@ -1,11 +1,13 @@
 import EventHandler from '../events';
+import setID from '../getID';
 
 const eventTokens = {
   onStateUpdate: 'onStateUpdate',
 };
 
 class ModelBase {
-  constructor(title, children = []) {
+  constructor({ title, id = setID(), children = [] }) {
+    this.id = id;
     this.title = title;
     this.children = children;
 
@@ -13,6 +15,22 @@ class ModelBase {
     this.events.publish(eventTokens.onStateUpdate);
 
     this.children.forEach(this.subscribeToChildStateChange, this);
+  }
+
+  getID() {
+    return this.id;
+  }
+
+  // Return an object with only serializable state, & with child IDs instead of full children
+  getSerializable() {
+    // const children = this.children.map((child) => child.id);
+    return {
+      id: this.id,
+      title: this.title,
+      // ! TEMP: I want to be able to save instances individually,
+      // TODO: ... so this should map to child.id instead
+      children: this.children.map((child) => child.getSerializable()),
+    };
   }
 
   makeView() {

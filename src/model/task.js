@@ -2,12 +2,24 @@ import ModelBase from './modelBase';
 import TaskView from '../view/task_view';
 
 class Task extends ModelBase {
-  constructor(title, description, dueDate, priority, isComplete = false) {
-    super(title);
+  constructor({
+    title, description, dueDate, priority, id, isComplete = false,
+  }) {
+    super({ title, id });
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.isComplete = isComplete;
+  }
+
+  getSerializable() {
+    return {
+      ...super.getSerializable(),
+      description: this.description,
+      dueDate: this.dueDate,
+      priority: this.priority,
+      isComplete: this.isComplete,
+    };
   }
 
   makeView() {
@@ -21,21 +33,14 @@ class Task extends ModelBase {
     this.description = description ?? this.description;
     this.priority = priority ?? this.priority;
     this.isComplete = isComplete ?? this.isComplete;
+
+    // null is ok, just not undefined
     if (dueDate !== undefined) {
       this.dueDate = dueDate;
     }
 
     this.stateUpdated();
   }
-
-  // setDueDate(dueDate) {
-  //   if (!dueDate) {
-  //     this.dueDate = null;
-  //   } else {
-  //     this.dueDate = dueDate;
-  //   }
-  //   this.events.invoke(eventTokens.onStateUpdate);
-  // }
 }
 
 const priorities = Object.freeze([

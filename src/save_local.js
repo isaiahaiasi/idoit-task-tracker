@@ -6,8 +6,8 @@ const SAVENAME = 'DIR_DATA';
 
 // take an array of projects & save it to localStorage
 const save = (directory) => {
-  console.log('saving directory');
-  const dirJSON = JSON.stringify(directory);
+  console.log(`saving ${directory.title}`);
+  const dirJSON = JSON.stringify(directory.getSerializable());
   window.localStorage.setItem(SAVENAME, dirJSON);
 };
 
@@ -25,26 +25,26 @@ const load = () => {
   console.log('Attempting to load from localStorage');
 
   const rawDir = JSON.parse(rawJSON);
-  const dir = new Directory('Default directory');
+  const dir = new Directory({ title: 'Default directory' });
 
   rawDir.children.forEach((project) => {
     const children = [];
 
     project.children.forEach((child) => {
-      children.push(new Task(
-        child.title,
-        child.description,
-        new Date(child.dueDate),
-        child.priority,
-        child.isComplete,
-      ));
+      children.push(new Task({
+        title: child.title,
+        description: child.description,
+        dueDate: new Date(child.dueDate),
+        priority: child.priority,
+        isComplete: child.isComplete,
+      }));
     });
 
-    dir.addChild(new Project(
-      project.title,
-      project.description,
+    dir.addChild(new Project({
+      title: project.title,
+      description: project.description,
       children,
-    ));
+    }));
   });
 
   console.log(rawDir);

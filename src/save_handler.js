@@ -2,12 +2,13 @@ import { eventTokens } from './model/modelBase';
 
 // Just takes a save method, & an object w an eventhandler
 const SaveHandler = ({ save, load }, directory) => {
-  const events = directory?.events;
+  const { events } = directory;
+  const handleLoad = load;
+
   const handleSave = () => {
     save(directory);
     console.log('saved');
   };
-  const handleLoad = load;
 
   if (!events) {
     console.warn('Save handler was passed an invalid object:');
