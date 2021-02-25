@@ -303,8 +303,8 @@ label {
   background-position:center;
 }
 
-.task-is-complete:checked ~ div,
-.task-is-complete:checked ~ span {
+.task-is-complete:checked ~ .task-text,
+.task-is-complete:checked ~ div .task-text {
   text-decoration:line-through;
   color: var(--col-shade-4);
 }

@@ -7,13 +7,6 @@ class Directory extends ModelBase {
     this.stateUpdated();
   }
 
-  getSerializable() {
-    return {
-      ...super.getSerializable(),
-      Type: 'Directory',
-    };
-  }
-
   getID() {
     console.log(`${this.title} id: DIRECTORY`);
     return 'DIRECTORY';

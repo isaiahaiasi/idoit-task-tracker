@@ -13,7 +13,6 @@ class Project extends ModelBase {
   getSerializable() {
     return {
       ...super.getSerializable(),
-      Type: 'Project',
       description: this.description,
     };
   }

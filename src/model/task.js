@@ -9,7 +9,7 @@ class Task extends ModelBase {
     this.description = description;
     this.priority = priority;
     this.isComplete = isComplete;
-    this.dueDate = new Date(dueDate);
+    this.dueDate = dueDate ? new Date(dueDate) : null;
     this.stateUpdated();
   }
 
@@ -17,7 +17,6 @@ class Task extends ModelBase {
     console.log(this.getID());
     return {
       ...super.getSerializable(),
-      Type: 'Task',
       description: this.description,
       dueDate: this.dueDate,
       priority: this.priority,

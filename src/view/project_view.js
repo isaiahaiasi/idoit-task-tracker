@@ -69,8 +69,8 @@ const ProjectView = (project) => {
   // ! This definitely doesn't feel very DRY...
   const _handleAddTask = (form) => {
     const title = form.querySelector('input[name="task-title"]');
-    const description = form.querySelector('input[name="task-description"]');
-    const priority = form.querySelector('select[name="task-priority"]');
+    const description = form.querySelector('input[name="task-description"]').value;
+    const priority = form.querySelector('select[name="task-priority"]').value;
 
     const formDate = form.querySelector('input[name="task-due-date"]')
       .value
@@ -88,9 +88,9 @@ const ProjectView = (project) => {
       return false;
     }
 
-    const newTask = new Task(
-      title.value, description.value, dueDate, priority.value,
-    );
+    const newTask = new Task({
+      title: title.value, description, dueDate, priority,
+    });
 
     _addTask(newTask);
 

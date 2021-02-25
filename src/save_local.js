@@ -36,6 +36,7 @@ const load = (localStorageKey) => {
 
   itemLiteral.children = children;
 
+  // This is so annoying, because I feel like I'm close to being class-agnostic
   let ItemConstructor;
   switch (itemLiteral.Type) {
     case 'Task':

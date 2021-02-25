@@ -100,7 +100,7 @@ const DirectoryView = (directory, contentContainer) => {
       return false;
     }
 
-    _addItem(new Project(title.value, description.value));
+    _addItem(new Project({ title: title.value, description: description.value }));
     return true;
   };
 

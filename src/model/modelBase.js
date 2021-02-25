@@ -24,6 +24,7 @@ class ModelBase {
   // & with child IDs instead of full children
   getSerializable() {
     return {
+      Type: this.constructor.name,
       id: this.id,
       title: this.title,
       children: this.children.map((child) => child.getID()),
