@@ -1,6 +1,6 @@
 // ! The current implementation does NOT allow for passing validation errors
 // * params:
-//   - SELECTOR for modal content element (should be in 'modal' template)
+//   - CONSTRUCTOR for the modal content
 //   - METHOD to attach to button
 //     - takes the modal content *element* as param
 //     - returns: true/false whether to close the modal (for validation)
@@ -11,23 +11,20 @@
 //     TODO: options for more buttons??
 // * returns: the function that opens the modal
 
-const ModalView = (templateContentSelector, submitFunc, options) => {
+const ModalView = (ModalConstructor, submitFunc, options) => {
   const modalTemplates = document.querySelector('#modal-templates').content;
   const modal = modalTemplates.querySelector('.modal').cloneNode(true);
 
-  let modalContent;
+  let modalContentView = ModalConstructor();
 
   const resetModalContent = () => {
-    modalContent = modalTemplates
-      .querySelector(templateContentSelector)
-      .cloneNode(true);
+    modalContentView = ModalConstructor();
   };
-  resetModalContent();
 
-  modal.querySelector('.modal-content').appendChild(modalContent);
+  modal.querySelector('.modal-content').appendChild(modalContentView.node);
 
   if (options && options.init) {
-    options.init(modalContent);
+    options.init(modalContentView);
   }
 
   const openModal = () => {
@@ -41,7 +38,7 @@ const ModalView = (templateContentSelector, submitFunc, options) => {
 
   const submitBtn = modal.querySelector('.submit-btn');
   submitBtn.addEventListener('click', () => {
-    if (submitFunc(modalContent)) {
+    if (submitFunc(modalContentView)) {
       closeModal();
     }
   });

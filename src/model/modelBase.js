@@ -1,4 +1,4 @@
-import EventHandler, { globalEvents } from '../events';
+import { globalEvents } from '../events';
 import setID from '../getID';
 
 const eventTokens = {
@@ -11,9 +11,6 @@ class ModelBase {
     this.id = id;
     this.title = title;
     this.children = children;
-
-    this.events = EventHandler();
-    // this.events.publish(eventTokens.onStateUpdate);
   }
 
   getID() {
@@ -36,7 +33,6 @@ class ModelBase {
   }
 
   stateUpdated() {
-    // this.events.invoke(eventTokens.onStateUpdate, this);
     globalEvents.invoke(eventTokens.onStateUpdate, this);
   }
 

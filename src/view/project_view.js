@@ -2,11 +2,13 @@ import TaskView from './task_view';
 import Task from '../model/task';
 import { removeAllChildren } from './view_utils';
 import ModalView from './modal_view';
+import TaskForm from './forms/task_form_view';
 
 const ProjectView = (project) => {
   const template = document.querySelector('#project-template');
   const projectTemplate = template.content.querySelector('.project');
   const node = projectTemplate.cloneNode(true);
+  const taskViewContainer = node.querySelector('.project-tasks-container');
   const taskViews = [];
 
   let doHideComplete = false;
@@ -17,7 +19,7 @@ const ProjectView = (project) => {
     });
   };
 
-  const _expandClass = (taskView) => {
+  const _expandTask = (taskView) => {
     taskViews.forEach((tv) => {
       if (tv === taskView) {
         taskView.toggleExpanded();
@@ -27,13 +29,13 @@ const ProjectView = (project) => {
     });
   };
 
-  const _renderTasks = (taskViewContainer) => {
+  const _renderTasks = () => {
     removeAllChildren(taskViewContainer);
     taskViews.splice(0, taskViews.length);
 
     project.children.forEach((task) => {
       const tv = TaskView(task, project);
-      tv.node.addEventListener('click', () => _expandClass(tv));
+      tv.node.addEventListener('click', () => _expandTask(tv));
       taskViewContainer.appendChild(tv.node);
       taskViews.push(tv);
     });
@@ -44,13 +46,10 @@ const ProjectView = (project) => {
   };
 
   const render = () => {
-    // Set title & description
     node.querySelector('.project-title').textContent = project.title;
     node.querySelector('.project-description').textContent = project.description;
 
-    // Render tasks
-    const taskViewContainer = node.querySelector('.project-tasks-container');
-    _renderTasks(taskViewContainer);
+    _renderTasks();
   };
 
   const _addTask = (task) => {
@@ -66,32 +65,14 @@ const ProjectView = (project) => {
     });
   };
 
-  // ! This definitely doesn't feel very DRY...
   const _handleAddTask = (form) => {
-    const title = form.querySelector('input[name="task-title"]');
-    const description = form.querySelector('input[name="task-description"]').value;
-    const priority = form.querySelector('select[name="task-priority"]').value;
+    const formValues = form.get();
 
-    const formDate = form.querySelector('input[name="task-due-date"]')
-      .value
-      .split('-');
-    const dueDate = (formDate[0] && formDate[1] && formDate[2])
-      ? new Date(formDate[0], formDate[1] - 1, formDate[2])
-      : null;
-
-    // Validation
-    const titleValidation = form.querySelector('.field-validation[for="task-title"]');
-    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
-
-    if (!title.value) {
-      titleValidation.classList.add('reveal');
-      return false;
+    if (!formValues) {
+      return null;
     }
 
-    const newTask = new Task({
-      title: title.value, description, dueDate, priority,
-    });
-
+    const newTask = new Task(formValues);
     _addTask(newTask);
 
     return true;
@@ -100,7 +81,7 @@ const ProjectView = (project) => {
   const _initAddTaskButton = () => {
     const addTaskBtn = node.querySelector('.add-task-btn');
     addTaskBtn.addEventListener('click', () => {
-      ModalView('.add-task-form', _handleAddTask).openModal();
+      ModalView(TaskForm, _handleAddTask).openModal();
     });
   };
 

@@ -1,5 +1,7 @@
 import { format as dateFormat } from 'date-fns';
 import ModalView from './modal_view';
+import TaskForm from './forms/task_form_view';
+import DeleteConfirmationView from './delete_confirm_view';
 
 const taskView = (task, project) => {
   const template = document.querySelector('#task-template');
@@ -41,29 +43,13 @@ const taskView = (task, project) => {
   };
 
   const _handleEditTask = (form) => {
-    const title = form.querySelector('input[name="task-title"]');
-    const description = form.querySelector('input[name="task-description"]').value;
-    const priority = form.querySelector('select[name="task-priority"]').value;
+    const formState = form.get();
 
-    const formDate = form.querySelector('input[name="task-due-date"]')
-      .value
-      .split('-');
-    const dueDate = (formDate[0] && formDate[1] && formDate[2])
-      ? new Date(formDate[0], formDate[1] - 1, formDate[2])
-      : null;
-
-    // Validation
-    const titleValidation = form.querySelector('.field-validation[for="task-title"]');
-    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
-
-    if (!title.value) {
-      titleValidation.classList.add('reveal');
+    if (!formState) {
       return false;
     }
 
-    task.setState({
-      title: title.value, description, priority, dueDate,
-    });
+    task.setState(formState);
 
     render();
 
@@ -76,27 +62,11 @@ const taskView = (task, project) => {
       e.stopPropagation();
       const options = {
         init: (modalContent) => {
-          const title = modalContent.querySelector('.modal-title');
-          title.textContent = 'Edit task';
-          const submitBtn = modalContent.querySelector('.submit-btn');
-          submitBtn.textContent = 'Save task';
-
-          const modTitle = modalContent.querySelector('input[name="task-title"]');
-          const modDescription = modalContent.querySelector('input[name="task-description"]');
-          const modPriority = modalContent.querySelector('select[name="task-priority"]');
-          const modFormDate = modalContent.querySelector('input[name="task-due-date"]');
-
-          modTitle.value = task.title;
-          modDescription.value = task.description;
-          modPriority.value = task.priority;
-          if (task.dueDate != null) {
-            // Date needs to be formatted in a precise way or it will not set
-            modFormDate.value = dateFormat(task.dueDate, 'yyyy-MM-dd');
-          }
+          modalContent.set(task);
         },
       };
 
-      ModalView('.add-task-form', _handleEditTask, options).openModal();
+      ModalView(TaskForm, _handleEditTask, options).openModal();
     });
   };
 
@@ -115,7 +85,7 @@ const taskView = (task, project) => {
     const deleteBtn = node.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      ModalView('.confirmation-form', _deleteTask).openModal();
+      ModalView(DeleteConfirmationView, _deleteTask).openModal();
     });
   };
 

@@ -1,5 +1,7 @@
 import Project from '../model/project';
 import ModalView from './modal_view';
+import ProjectForm from './forms/project_form_view';
+import DeleteConfirmationView from './delete_confirm_view';
 
 // Tab for each project
 const DirectoryItem = (itemModel, contentContainer) => {
@@ -67,7 +69,7 @@ const DirectoryView = (directory, contentContainer) => {
 
       projectPreview.deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation(); // b/c the btn's container has the above click event listener
-        ModalView('.confirmation-form', () => {
+        ModalView(DeleteConfirmationView, () => {
           directory.deleteChild(itemModel);
           _render();
           return true;
@@ -89,24 +91,19 @@ const DirectoryView = (directory, contentContainer) => {
   };
 
   const _handleProjectForm = (form) => {
-    const title = form.querySelector('input[name="project-title"]');
-    const description = form.querySelector('input[name="project-description"]');
+    const formValues = form.get();
 
-    const titleValidation = form.querySelector('.field-validation[for="project-title"]');
-    title.addEventListener('input', () => titleValidation.classList.remove('reveal'));
-
-    if (!title.value) {
-      titleValidation.classList.add('reveal');
+    if (!formValues) {
       return false;
     }
 
-    _addItem(new Project({ title: title.value, description: description.value }));
+    _addItem(new Project(formValues));
     return true;
   };
 
   const addTaskBtn = node.querySelector('.add-project-btn');
   addTaskBtn.addEventListener('click', () => {
-    ModalView('.add-project-form', _handleProjectForm).openModal();
+    ModalView(ProjectForm, _handleProjectForm).openModal();
   });
 
   _render();
