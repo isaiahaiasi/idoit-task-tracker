@@ -11,6 +11,7 @@ class ModelBase {
     this.id = id;
     this.title = title;
     this.children = children;
+    this.Type = this.constructor.name;
   }
 
   getID() {
@@ -21,7 +22,7 @@ class ModelBase {
   // & with child IDs instead of full children
   getSerializable() {
     return {
-      Type: this.constructor.name,
+      Type: this.Type,
       id: this.id,
       title: this.title,
       children: this.children.map((child) => child.getID()),

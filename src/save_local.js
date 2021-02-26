@@ -15,6 +15,8 @@ const _getConstructor = (saveableItemLiteral) => {
       return Directory;
     default:
       console.log(`Did not find valid type for ${saveableItemLiteral.title}`);
+      console.log(`type: ${saveableItemLiteral.Type}`);
+      console.log(saveableItemLiteral);
       return ModelBase;
   }
 };

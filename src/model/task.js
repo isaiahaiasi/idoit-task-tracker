@@ -6,6 +6,7 @@ class Task extends ModelBase {
     title, description, dueDate, priority, id, isComplete = false,
   }) {
     super({ title, id });
+    this.Type = 'Task';
     this.description = description;
     this.priority = priority;
     this.isComplete = isComplete;

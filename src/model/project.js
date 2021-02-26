@@ -6,6 +6,7 @@ class Project extends ModelBase {
     title, description, children = [], id,
   }) {
     super({ title, children, id });
+    this.Type = 'Project';
     this.description = description;
     this.stateUpdated();
   }
