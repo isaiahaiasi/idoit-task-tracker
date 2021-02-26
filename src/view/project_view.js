@@ -49,6 +49,7 @@ const ProjectView = (project) => {
     node.querySelector('.project-title').textContent = project.title;
     node.querySelector('.project-description').textContent = project.description;
 
+    project.sort();
     _renderTasks();
   };
 

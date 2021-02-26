@@ -79,6 +79,9 @@ const taskView = (task, project) => {
     isCompleteCheckbox.addEventListener('click', (e) => e.stopPropagation());
     isCompleteCheckbox.addEventListener('change', () => {
       task.setState({ isComplete: isCompleteCheckbox.checked });
+      // TODO: have projectview re-render when isComplete changes
+      // (so it reorders the project correctly immediately)
+      project.sort();
       _updateHiddenState();
     });
 
