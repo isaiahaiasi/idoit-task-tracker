@@ -1,153 +1,145 @@
 {
-  "id": 1614224629590.167,
-  "title": "Default directory",
+  "Type": "Directory",
+  "id": 1614316060708.533,
+  "title": "RootDirectory",
   "children": [
     {
-      "id": 1614224629590.595,
-      "title": "Test 2",
+      "Type": "Project",
+      "id": 1614313492335.7388,
+      "title": "To-Do List To-Do",
       "children": [
         {
-          "id": 1614224629590.6067,
-          "title": "Clean the living room",
-          "children": [],
-          "description": "lorem ipsum fkeafek aofeka fokea pfke pafk eapof ea",
-          "dueDate": "2021-10-20T07:00:00.000Z",
-          "priority": "high",
-          "isComplete": true
-        },
-        {
-          "id": 1614224629590.692,
-          "title": "Write stirring defense of semicolons",
-          "children": [],
-          "description": "lorem ipsum fkeafek aofeka fokea pfke pafk eapof ea",
-          "dueDate": "2021-09-01T07:00:00.000Z",
-          "priority": "low",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629590.1394,
-          "title": "Learn Sass",
-          "children": [],
-          "description": "lorem ipsum fkeafek aofeka fokea pfke pafk eapof ea",
-          "dueDate": "2021-03-02T07:00:00.000Z",
-          "priority": "low",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629590.1045,
-          "title": "Change the sheets",
-          "children": [],
-          "description": "Description description description description",
-          "dueDate": "2021-02-24T07:00:00.000Z",
-          "priority": "medium",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629590.2158,
-          "title": "Write stirring defense of semicolons",
-          "children": [],
-          "description": "Description description description description",
-          "dueDate": "2021-04-28T07:00:00.000Z",
-          "priority": "low",
-          "isComplete": false
-        }
-      ]
-    },
-    {
-      "id": 1614224629591.5735,
-      "title": "Final Stretch To-Do",
-      "children": [
-        {
-          "id": 1614224629591.454,
+          "Type": "Task",
+          "id": 1614313649576.8105,
           "title": "Add footer",
           "children": [],
-          "description": "Should include github link & icon",
-          "dueDate": "2021-02-24T07:00:00.000Z",
-          "priority": "high",
-          "isComplete": true
-        },
-        {
-          "id": 1614224629591.4785,
-          "title": "Add validation visual",
-          "children": [],
-          "description": "Extend forms to display validation failure message",
+          "description": "Incl. github icon, link",
           "dueDate": "2021-02-23T07:00:00.000Z",
           "priority": "high",
           "isComplete": true
         },
         {
-          "id": 1614224629591.9968,
-          "title": "Replace placeholder buttons with SVG",
+          "Type": "Task",
+          "id": 1614313695756.5474,
+          "title": "Add validation error msg",
           "children": [],
-          "description": "(Using Material icons)",
+          "description": "(only title needs to be validated. Animate if feasible)",
           "dueDate": "2021-02-23T07:00:00.000Z",
           "priority": "high",
           "isComplete": true
         },
         {
-          "id": 1614224629591.694,
-          "title": "Expand when any part of task clicked",
+          "Type": "Task",
+          "id": 1614313772752.9905,
+          "title": "Replace ugly buttons with svg",
           "children": [],
-          "description": "...Not just the button. (need \"event.stopPropagation()\")",
+          "description": "close. edit. expand. add. I think that's it...",
           "dueDate": "2021-02-23T07:00:00.000Z",
           "priority": "high",
           "isComplete": true
         },
         {
-          "id": 1614224629591.97,
-          "title": "Fix CSS bugs",
+          "Type": "Task",
+          "id": 1614314048251.5134,
+          "title": "Sorting???",
           "children": [],
-          "description": "eg, sidebar not filling available space...",
+          "description": "At least complete vs not-complete",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "high",
+          "isComplete": false
+        },
+        {
+          "Type": "Task",
+          "id": 1614314140609.9197,
+          "title": "Deploy",
+          "children": [],
+          "description": "Just adding this as an item b/c I'm pretty sure it will be a huge headache...",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "high",
+          "isComplete": false
+        },
+        {
+          "Type": "Task",
+          "id": 1614313885804.426,
+          "title": "Revert expand to container click",
+          "children": [],
+          "description": "I'd moved it to the button, but then I discovered stopPropagation",
           "dueDate": "2021-02-23T07:00:00.000Z",
           "priority": "medium",
           "isComplete": true
         },
         {
-          "id": 1614224629591.2556,
-          "title": "Continue pubsub refactor",
+          "Type": "Task",
+          "id": 1614313932357.3252,
+          "title": "Fix CSS bugs...",
           "children": [],
-          "description": "A lot of my \"view\" functionality is still too tightly coupled",
+          "description": "eg, sidebar doesn't extend to bottom",
+          "dueDate": "2021-02-23T07:00:00.000Z",
+          "priority": "medium",
+          "isComplete": true
+        },
+        {
+          "Type": "Task",
+          "id": 1614314102458.7297,
+          "title": "Add default project",
+          "children": [],
+          "description": "(spoilers: it's this)",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "medium",
+          "isComplete": false
+        },
+        {
+          "Type": "Task",
+          "id": 1614314205990.8896,
+          "title": "Fix date bugs",
+          "children": [],
+          "description": "Accidentally passing null to Date constructor, which gets me 1969, lol...",
+          "dueDate": "1969-12-31T07:00:00.000Z",
+          "priority": "medium",
+          "isComplete": false
+        },
+        {
+          "Type": "Task",
+          "id": 1614314289469.611,
+          "title": "Refactor serialization",
+          "children": [],
+          "description": "Give each task/project/directory an ID, use as localStorage key (instead of one mega-object that has to update every time)",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "medium",
+          "isComplete": true
+        },
+        {
+          "Type": "Task",
+          "id": 1614313968830.5278,
+          "title": "Refine CSS",
+          "children": [],
+          "description": "Text align, the weird variable to-do table view, etc",
           "dueDate": "2021-02-24T07:00:00.000Z",
           "priority": "low",
           "isComplete": false
         },
         {
-          "id": 1614224629591.2327,
-          "title": "Sorting???",
+          "Type": "Task",
+          "id": 1614314009927.6355,
+          "title": "Refactor form handling out of project/task views",
           "children": [],
-          "description": "At the very least, I want to auto-sort 'complete' tasks",
-          "dueDate": "2021-02-24T07:00:00.000Z",
-          "priority": "medium",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629591.209,
-          "title": "Better default projects/tasks",
-          "children": [],
-          "description": "I can write them with the site, then just export JSON & load as default",
-          "dueDate": "2021-02-24T07:00:00.000Z",
-          "priority": "medium",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629591.8289,
-          "title": "Make sure production (gh-pages) branch actually works!",
-          "children": [],
-          "description": "Hopefully this time will be smoother, since I'm using the proper loaders",
-          "dueDate": "2021-02-24T07:00:00.000Z",
-          "priority": "high",
-          "isComplete": false
-        },
-        {
-          "id": 1614224629591.076,
-          "title": "Add confirmation to \"delete project\"",
-          "children": [],
-          "description": "",
-          "dueDate": "2021-02-23T07:00:00.000Z",
-          "priority": "high",
+          "description": "The code is very repetitive & hard to read",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "low",
           "isComplete": true
+        },
+        {
+          "Type": "Task",
+          "id": 1614314650068.6636,
+          "title": "Handle empty project/directory???",
+          "children": [],
+          "description": "I probably should, but... ugh...",
+          "dueDate": "2021-02-25T07:00:00.000Z",
+          "priority": "medium",
+          "isComplete": false
         }
-      ]
+      ],
+      "description": "A to-do list for my to-do list project"
     }
   ]
 }
