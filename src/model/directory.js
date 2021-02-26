@@ -7,8 +7,8 @@ class Directory extends ModelBase {
     this.stateUpdated();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getID() {
-    console.log(`${this.title} id: DIRECTORY`);
     return 'DIRECTORY';
   }
 }

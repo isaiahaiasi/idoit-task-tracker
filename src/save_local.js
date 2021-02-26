@@ -58,10 +58,7 @@ const load = (localStorageKey) => {
   return _assignNestedObj(nestedObj);
 };
 
-const loadDefault = () => {
-  console.log(defaultData);
-  return _assignNestedObj(defaultData);
-};
+const loadDefault = () => _assignNestedObj(defaultData);
 
 // remove a localStorage key (ie, when the referenced obj is deleted)
 const remove = (saveableItem) => {
@@ -72,7 +69,6 @@ const remove = (saveableItem) => {
 
 // save an item in localstorage at its ID's location
 const save = (saveableItem) => {
-  console.log(`saving ${saveableItem.title}`);
   const dirJSON = JSON.stringify(saveableItem.getSerializable());
   window.localStorage.setItem(saveableItem.getID(), dirJSON);
 };

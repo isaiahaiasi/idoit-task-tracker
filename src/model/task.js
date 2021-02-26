@@ -14,7 +14,6 @@ class Task extends ModelBase {
   }
 
   getSerializable() {
-    console.log(this.getID());
     return {
       ...super.getSerializable(),
       description: this.description,

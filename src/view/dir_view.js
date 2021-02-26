@@ -38,6 +38,10 @@ const DirectoryView = (directory, contentContainer) => {
   let projectPreviews = [];
   let selectedItem = directory.children[0];
 
+  // text that shows when there are no projects
+  const placeholder = document.createElement('h1');
+  placeholder.textContent = 'You did it!';
+
   // called on projectPreview.node.onClick
   const _selectItem = (itemPreview) => {
     projectPreviews.forEach((pv) => {
@@ -57,6 +61,12 @@ const DirectoryView = (directory, contentContainer) => {
   };
 
   const _render = () => {
+    if (directory.children.length === 0) {
+      contentContainer.appendChild(placeholder);
+    } else {
+      placeholder.remove();
+    }
+
     _clearItems();
     directory.children.forEach((itemModel) => {
       const projectPreview = DirectoryItem(itemModel, contentContainer);

@@ -7,7 +7,6 @@ const SaveHandler = ({ save, load, remove }) => {
 
   const handleSave = (saveableItem) => {
     save(saveableItem);
-    console.log('saved');
   };
 
   globalEvents.publish(eventTokens.onStateUpdate);
