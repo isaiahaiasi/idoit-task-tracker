@@ -3,6 +3,8 @@ The Odin Project: To-Do List
 
 *Struggles with task management got you feeling dumb? Maybe you need IDOIT!*
 
+[Use IDOIT here](https://isaiahaiasi.github.io/idoit-task-tracker/)
+
 ## Structure
 In an effort to avoid over-engineering, I'm starting by basically implementing a "model-view-controller" structure without a controller. I'm pretty sure this means I **will** be doing a lot of refactoring, but the process of refactoring what MUST be refactored is probably a better learning experience than trying to predict what MIGHT ought to be refactored.
 
