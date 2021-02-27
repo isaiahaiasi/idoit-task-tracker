@@ -5,6 +5,10 @@ export default function TaskForm() {
   const modalTemplates = document.querySelector('#modal-templates').content;
   const node = modalTemplates.querySelector('.add-task-form').cloneNode(true);
 
+  // initialize min date
+  const dateInput = node.querySelector('input[type="date"]');
+  dateInput.min = dateFormat(new Date(), 'yyyy-MM-dd');
+
   // Sets the form fields based on the properties of a given task
   const set = (task) => {
     const title = node.querySelector('.modal-title');
